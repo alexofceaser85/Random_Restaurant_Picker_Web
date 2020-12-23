@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.DynamicData;
 using System.Web.WebPages;
 using Random_Restaurant_Picker.ErrorMessages;
 
@@ -16,6 +17,7 @@ namespace Random_Restaurant_Picker.Models {
     public class Restaurant {
 
         private static readonly int RESTAURANT_MINIMUM_DISTANCE = 0;
+        private static readonly int RESTAURANT_MINIMUM_REVIEW_COUNT = 0;
         private static readonly int RESTAURANT_MINIMUM_REVIEW_SCORE = 1;
         private static readonly int RESTAURANT_MAXIMUM_REVIEW_SCORE = 5;
 
@@ -80,7 +82,7 @@ namespace Random_Restaurant_Picker.Models {
 
         public Restaurant(String name, String price, String location, String hours, int distance, double reviewScore, int reviewCount, String menuURL, String imageURL, String id) {
 
-            checkPreconditions(name, price, location, hours, distance, reviewScore, menuURL, id);
+            checkPreconditions(name, price, location, hours, distance, reviewScore, reviewCount, menuURL, imageURL, id);
 
             this.name = name;
             this.price = price;
@@ -220,7 +222,19 @@ namespace Random_Restaurant_Picker.Models {
             return this.id;
         }
 
-        private static void checkPreconditions(string name, string price, string location, string hours, int distance, double reviewScore, string menuURL, string id) {
+        /**
+         * Returns the string representation of the restaurant
+         * 
+         * @precondition none
+         * @postcondition none
+         * 
+         * @return the string representation of the restaurant object
+         **/
+       
+        public String toString() {
+            return "Restaurant (name: " + this.getName() + " price: " + this.getPrice() + " location: " + this.getLocation() + " hours: " + this.getHours() + " distance: " + this.getDistance() + " review score: " + this.getReviewScore() + " review count: " + this.getReviewCount() + " menu URL: " + this.getMenuURL() + " image URL: " + this.getImageURL() + " id: " + this.getId() + ')';
+        }
+        private static void checkPreconditions(string name, string price, string location, string hours, int distance, double reviewScore, int reviewCount, string menuURL, string imageURL, string id) {
             if (name == null) {
                 throw new System.ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_NAME_CANNOT_BE_NULL);
             }
@@ -254,11 +268,20 @@ namespace Random_Restaurant_Picker.Models {
             if (reviewScore > RESTAURANT_MAXIMUM_REVIEW_SCORE) {
                 throw new System.ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_REVIEW_SCORE_CANNOT_BE_MORE_THAN_FIVE);
             }
+            if(reviewCount < RESTAURANT_MINIMUM_REVIEW_COUNT) {
+                throw new System.ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_REVIEW_COUNT_CANNOT_BE_LESS_THAN_ZERO);
+            }
             if (menuURL == null) {
                 throw new System.ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_MENU_URL_CANNOT_BE_NULL);
             }
             if (menuURL.IsEmpty()) {
                 throw new System.ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_MENU_URL_CANNOT_BE_EMPTY);
+            }
+            if (imageURL == null) {
+                throw new System.ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_IMAGE_URL_CANNOT_BE_NULL);
+            }
+            if (imageURL.IsEmpty()) {
+                throw new System.ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_IMAGE_URL_CANNOT_BE_EMPTY);
             }
             if (id == null) {
                 throw new System.ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_ID_CANNOT_BE_NULL);
