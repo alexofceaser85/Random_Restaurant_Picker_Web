@@ -95,10 +95,130 @@ namespace Random_Restaurant_Picker.Models {
         }
 
         /**
+         * the getter for the restaurant name
          * 
+         * @precondition none
+         * @postcondition none
          * 
-         * 
+         * @return the restaurant name
          **/
+
+        public String getName() {
+            return this.name;
+        }
+
+        /**
+         * the getter for the restaurant price
+         * 
+         * @precondition none
+         * @postcondition none
+         * 
+         * @return the restaurant price
+         **/
+
+        public String getPrice() {
+            return this.price;
+        }
+
+        /**
+         * the getter for the restaurant location
+         * 
+         * @precondition none
+         * @postcondition none
+         * 
+         * @return the restaurant location
+         **/
+         public String getLocation() {
+            return this.location;
+        }
+
+        /**
+         * the getter for the restaurant hours
+         * 
+         * @precondition none
+         * @postcondition none
+         * 
+         * @return the restaurant hours
+         **/
+        public String getHours() {
+            return this.hours;
+        }
+
+        /**
+         * the getter for the restaurant distance
+         * 
+         * @precondition none
+         * @postcondition none
+         * 
+         * @return the restaurant distance
+         **/
+
+        public int getDistance() {
+            return this.distance;
+        }
+
+        /**
+         * the getter for the restaurant review score
+         * 
+         * @precondition none
+         * @postcondition none
+         * 
+         * @return the restaurant review score
+         **/
+         public double getReviewScore() {
+            return this.reviewScore;
+        }
+
+        /**
+         * the getter for the restaurant review count
+         * 
+         * @precondition none
+         * @postcondition none
+         * 
+         * @return the restaurant review count
+         **/
+         public int getReviewCount() {
+            return this.reviewCount;
+        }
+
+        /**
+         * the getter for the restaurant menu URL
+         * 
+         * @precondition none
+         * @postcondition none
+         * 
+         * @return the restaurant menu URL
+         **/
+
+        public String getMenuURL() {
+            return this.menuURL;
+        }
+
+        /**
+        * the getter for the restaurant image URL
+        * 
+        * @precondition none
+        * @postcondition none
+        * 
+        * @return the restaurant image URL
+        **/
+
+        public String getImageURL() {
+            return this.imageURL;
+        }
+
+        /**
+         * the getter for the restaurant id
+         * 
+         * @precondition none
+         * @postcondition none
+         * 
+         * @return the restaurant id
+         **/
+
+        public String getId() {
+            return this.id;
+        }
 
         private static void checkPreconditions(string name, string price, string location, string hours, int distance, double reviewScore, string menuURL, string id) {
             if (name == null) {
