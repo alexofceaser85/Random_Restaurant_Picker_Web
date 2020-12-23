@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Random_Restaurant_Picker", "Random_Restaurant_Picker\Random_Restaurant_Picker.csproj", "{879EA0AA-0A5F-4FBD-8200-6254D5137AD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Random_Restaurant_Picker_Tests", "Random_Restaurant_Picker_Tests\Random_Restaurant_Picker_Tests.csproj", "{1940C767-7FA0-4A30-A8B0-D64B5AB82233}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Random_Restaurant_Picker_Tests", "Random_Restaurant_Picker_Tests\Random_Restaurant_Picker_Tests.csproj", "{66857D7D-8DFB-441C-B877-A387C596148C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{879EA0AA-0A5F-4FBD-8200-6254D5137AD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{879EA0AA-0A5F-4FBD-8200-6254D5137AD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{879EA0AA-0A5F-4FBD-8200-6254D5137AD3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1940C767-7FA0-4A30-A8B0-D64B5AB82233}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1940C767-7FA0-4A30-A8B0-D64B5AB82233}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1940C767-7FA0-4A30-A8B0-D64B5AB82233}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1940C767-7FA0-4A30-A8B0-D64B5AB82233}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66857D7D-8DFB-441C-B877-A387C596148C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66857D7D-8DFB-441C-B877-A387C596148C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66857D7D-8DFB-441C-B877-A387C596148C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66857D7D-8DFB-441C-B877-A387C596148C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
