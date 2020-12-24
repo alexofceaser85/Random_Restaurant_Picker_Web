@@ -23,7 +23,8 @@ namespace Random_Restaurant_Picker.ErrorMessages {
         public static readonly String RESTAURANT_LOCATION_CANNOT_BE_EMPTY = "The restaurant loccation cannot be empty";
         public static readonly String RESTAURANT_HOURS_CANNOT_BE_NULL = "The restaurant hours cannot be null";
         public static readonly String RESTAURANT_HOURS_CANNOT_BE_EMPTY = "The restaurant hours cannot be empty";
-        public static readonly String RESTAURANT_DISTANCE_CANNOT_BE_LESS_THAN_ZERO = "The restaurant distance cannot be less than zero";
+        public static readonly String RESTAURANT_DISTANCE_CANNOT_BE_NULL = "The restaurant distance cannot be null";
+        public static readonly String RESTAURANT_DISTANCE_CANNOT_BE_EMPTY = "The restaurant distance cannot be empty";
         public static readonly String RESTAURANT_REVIEW_SCORE_CANNOT_BE_LESS_THAN_ZERO = "The restaurant review score cannot be less than zero";
         public static readonly String RESTAURANT_REVIEW_SCORE_CANNOT_BE_MORE_THAN_FIVE = "The restaurant review score cannot be more than five";
         public static readonly String RESTAURANT_REVIEW_COUNT_CANNOT_BE_LESS_THAN_ZERO = "The restaurant review count cannot be less than zero";

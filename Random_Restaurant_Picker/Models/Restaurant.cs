@@ -16,7 +16,6 @@ namespace Random_Restaurant_Picker.Models {
 
     public class Restaurant {
 
-        private static readonly int RESTAURANT_MINIMUM_DISTANCE = 0;
         private static readonly int RESTAURANT_MINIMUM_REVIEW_COUNT = 0;
         private static readonly int RESTAURANT_MINIMUM_REVIEW_SCORE = 1;
         private static readonly int RESTAURANT_MAXIMUM_REVIEW_SCORE = 5;
@@ -25,7 +24,7 @@ namespace Random_Restaurant_Picker.Models {
         private String price;
         private String location;
         private String hours;
-        private int distance;
+        private String distance;
         private double reviewScore;
         private int reviewCount;
         private String menuURL;
@@ -80,7 +79,7 @@ namespace Random_Restaurant_Picker.Models {
          *      id:             the yelp id of the restaurant
          **/
 
-        public Restaurant(String name, String price, String location, String hours, int distance, double reviewScore, int reviewCount, String menuURL, String imageURL, String id) {
+        public Restaurant(String name, String price, String location, String hours, String distance, double reviewScore, int reviewCount, String menuURL, String imageURL, String id) {
 
             checkPreconditions(name, price, location, hours, distance, reviewScore, reviewCount, menuURL, imageURL, id);
 
@@ -155,7 +154,7 @@ namespace Random_Restaurant_Picker.Models {
          * @return the restaurant distance
          **/
 
-        public int getDistance() {
+        public String getDistance() {
             return this.distance;
         }
 
@@ -234,7 +233,7 @@ namespace Random_Restaurant_Picker.Models {
         public String toString() {
             return "Restaurant (name: " + this.getName() + " price: " + this.getPrice() + " location: " + this.getLocation() + " hours: " + this.getHours() + " distance: " + this.getDistance() + " review score: " + this.getReviewScore() + " review count: " + this.getReviewCount() + " menu URL: " + this.getMenuURL() + " image URL: " + this.getImageURL() + " id: " + this.getId() + ')';
         }
-        private static void checkPreconditions(string name, string price, string location, string hours, int distance, double reviewScore, int reviewCount, string menuURL, string imageURL, string id) {
+        private static void checkPreconditions(String name, String price, String location, String hours, String distance, double reviewScore, int reviewCount, String menuURL, String imageURL, String id) {
             if (name == null) {
                 throw new System.ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_NAME_CANNOT_BE_NULL);
             }
@@ -259,8 +258,11 @@ namespace Random_Restaurant_Picker.Models {
             if (hours.IsEmpty()) {
                 throw new System.ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_HOURS_CANNOT_BE_EMPTY);
             }
-            if (distance < RESTAURANT_MINIMUM_DISTANCE) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_DISTANCE_CANNOT_BE_LESS_THAN_ZERO);
+            if (distance == null) {
+                throw new System.ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_DISTANCE_CANNOT_BE_NULL);
+            }
+            if (distance.IsEmpty()) {
+                throw new System.ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_DISTANCE_CANNOT_BE_EMPTY);
             }
             if (reviewScore < RESTAURANT_MINIMUM_REVIEW_SCORE) {
                 throw new System.ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_REVIEW_SCORE_CANNOT_BE_LESS_THAN_ZERO);
