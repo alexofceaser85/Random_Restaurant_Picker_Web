@@ -43,7 +43,8 @@ namespace Random_Restaurant_Picker.Models {
          *      location.isEmpty()  == False
          *      hours               != null
          *      hours.isEmpty()     == False
-         *      distance            >= 0
+         *      distance            != null
+         *      distance.isEmpty()  == False
          *      reviewScore         >= 0 
          *      reviewScore         <= 5
          *      reviewCount         >= 0
