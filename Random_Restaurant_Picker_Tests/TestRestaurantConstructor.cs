@@ -6,6 +6,7 @@ using Random_Restaurant_Picker.Models;
 namespace Random_Restaurant_Picker_Tests {
     [TestClass]
     public class TestRestaurantConstructor {
+
         [TestMethod]
         public void constructorShouldNotAllowNullName() {
             Assert.ThrowsException<ArgumentException>(() => new Random_Restaurant_Picker.Models.Restaurant(null, "$", "Senoia GA", "9:00 - 5:00", 5, 4.5, 5, "URL.com", "URL.com", "5"));

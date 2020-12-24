@@ -49,6 +49,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TestAddRestaurant.cs" />
+    <Compile Include="TestGetNumberOfRestaurants.cs" />
+    <Compile Include="TestPickRandomRestaurant.cs" />
+    <Compile Include="TestRemoveRestaurant.cs" />
     <Compile Include="TestRestaurantConstructor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
