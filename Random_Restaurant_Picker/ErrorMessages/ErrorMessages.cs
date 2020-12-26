@@ -42,5 +42,11 @@ namespace Random_Restaurant_Picker.ErrorMessages {
         public static readonly String MINIMUM_RESTAURANT_INDEX_CANNOT_BE_LESS_THAN_ZERO = "The minimum restaurant index cannot be less than zero";
         public static readonly String MAXIMUM_RESTAURANT_INDEX_CANNOT_BE_LESS_THAN_ZERO = "The maximum restaurant index cannot be less than zero";
         public static readonly String MINIMUM_RESTAURANT_INDEX_CANNOT_BE_MORE_THAN_MAXIMUM_RESTAURANT_INDEX = "The minimum restaurant index cannot be more than the maximum restaurant index";
+
+        //The error messages for the restaurant filters class
+
+        public static readonly String FILTER_TO_ADD_CANNOT_BE_NULL = "The filter to add cannot be null";
+        public static readonly String FILTER_TO_ADD_CANNOT_BE_EMPTY = "The filter to add cannot be null";
+        public static readonly String PRICE_TO_REMOVE_CANNOT_BE_NULL = "The price to remove cannot be null";
     }
 }

@@ -49,11 +49,11 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestAddRestaurant.cs" />
-    <Compile Include="TestGetNumberOfRestaurants.cs" />
-    <Compile Include="TestPickRandomRestaurant.cs" />
-    <Compile Include="TestRemoveRestaurant.cs" />
-    <Compile Include="TestRestaurantConstructor.cs" />
+    <Compile Include="TestsForRestaurantManager\TestAddRestaurant.cs" />
+    <Compile Include="TestsForRestaurantManager\TestGetNumberOfRestaurants.cs" />
+    <Compile Include="TestsForRestaurantManager\TestPickRandomRestaurant.cs" />
+    <Compile Include="TestsForRestaurantManager\TestRemoveRestaurant.cs" />
+    <Compile Include="TestsForRestaurant\TestRestaurantConstructor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +64,9 @@
       <Project>{d491808e-253b-4da5-afcc-8c52f4f6c641}</Project>
       <Name>Random_Restaurant_Picker</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="TestsForRestaurantFilters\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
