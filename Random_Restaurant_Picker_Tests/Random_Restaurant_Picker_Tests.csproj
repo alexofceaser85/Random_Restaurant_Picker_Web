@@ -49,6 +49,24 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TestsForRestaurantFilters\AddDictionaryItem\TestAddAttributes.cs" />
+    <Compile Include="TestsForRestaurantFilters\AddDictionaryItem\TestAddFoodCatagory.cs" />
+    <Compile Include="TestsForRestaurantFilters\AddDictionaryItem\TestAddOpenNow.cs" />
+    <Compile Include="TestsForRestaurantFilters\AddDictionaryItem\TestAddPrice.cs" />
+    <Compile Include="TestsForRestaurantFilters\AddDictionaryItem\TestAddRadius.cs" />
+    <Compile Include="TestsForRestaurantFilters\AddDictionaryItem\TestAddReviewScore.cs" />
+    <Compile Include="TestsForRestaurantFilters\AddDictionaryItem\TestAddTerm.cs" />
+    <Compile Include="TestsForRestaurantFilters\AddDictionaryItem\TestAddLocation.cs" />
+    <Compile Include="TestsForRestaurantFilters\OtherTests\TestGetNonQueryFilters.cs" />
+    <Compile Include="TestsForRestaurantFilters\OtherTests\TestGetQueryFilters.cs" />
+    <Compile Include="TestsForRestaurantFilters\RemoveDictionaryItem\TestRemoveAttribute.cs" />
+    <Compile Include="TestsForRestaurantFilters\RemoveDictionaryItem\TestRemoveFoodCatagory.cs" />
+    <Compile Include="TestsForRestaurantFilters\RemoveDictionaryItem\TestRemoveLocation.cs" />
+    <Compile Include="TestsForRestaurantFilters\RemoveDictionaryItem\TestRemoveOpenNow.cs" />
+    <Compile Include="TestsForRestaurantFilters\RemoveDictionaryItem\TestRemovePrice.cs" />
+    <Compile Include="TestsForRestaurantFilters\RemoveDictionaryItem\TestRemoveRadius.cs" />
+    <Compile Include="TestsForRestaurantFilters\RemoveDictionaryItem\TestRemoveReviewScore.cs" />
+    <Compile Include="TestsForRestaurantFilters\RemoveDictionaryItem\TestRemoveTerm.cs" />
     <Compile Include="TestsForRestaurantManager\TestAddRestaurant.cs" />
     <Compile Include="TestsForRestaurantManager\TestGetNumberOfRestaurants.cs" />
     <Compile Include="TestsForRestaurantManager\TestPickRandomRestaurant.cs" />
@@ -65,9 +83,7 @@
       <Name>Random_Restaurant_Picker</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="TestsForRestaurantFilters\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

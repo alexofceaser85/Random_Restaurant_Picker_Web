@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages;
@@ -25,9 +26,7 @@ namespace Random_Restaurant_Picker.Models {
         private static readonly String FOOD_CATAGORIES_KEY = "categories";
         private static readonly String PRICE_KEY = "price";
         private static readonly String OPEN_NOW_KEY = "open_now";
-        private static readonly String WHEELCHAIR_ACCESSIBLE_KEY = "wheelchair_accessible";
-        private static readonly String ACCEPTS_RESERVATIONS_KEY = "reservation";
-        private static readonly String NEW_RESTAURANTS_KEY = "hot_and_new";
+        private static readonly String ATTRIBUTES_KEY = "attributes";
         private static readonly String REVIEW_SCORE_KEY = "review_score";
 
         /**
@@ -42,6 +41,32 @@ namespace Random_Restaurant_Picker.Models {
         public RestaurantFilters() {
             this.queryFilters = new Dictionary<String, String>();
             this.nonQueryFilters = new Dictionary<String, String>();
+        }
+
+        /**
+         * Gets the query filters dictionary
+         * 
+         * @precondition none
+         * @postcondition none
+         * 
+         * @return the query filters dictionary
+         **/
+
+        public Dictionary<String, String> getQueryFilters() {
+            return this.queryFilters;
+        }
+
+        /**
+         * Gets the non query filters dictionary
+         * 
+         * @precondition none
+         * @postcondition none
+         * 
+         * @return the non query filters dictionary
+         **/
+
+        public Dictionary<String, String> getNonQueryFilters() {
+            return this.queryFilters;
         }
 
         /**
@@ -131,6 +156,9 @@ namespace Random_Restaurant_Picker.Models {
             if (filterToAdd.IsEmpty()) {
                 throw new System.ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_EMPTY);
             }
+            if (!verifyRadius(filterToAdd)) {
+                throw new System.ArgumentException(ErrorMessages.ErrorMessages.RADIUS_TO_ADD_IS_NOT_IN_CORRECT_FORMAT);
+            }
 
             this.queryFilters.Add(RADIUS_KEY, filterToAdd);
         }
@@ -199,9 +227,21 @@ namespace Random_Restaurant_Picker.Models {
             if (filterToAdd.IsEmpty()) {
                 throw new System.ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_EMPTY);
             }
+            if (!verifyPrice(filterToAdd)) {
+                throw new System.ArgumentException(ErrorMessages.ErrorMessages.PRICE_TO_ADD_IS_NOT_IN_CORRECT_FORMAT);
+            }
 
-            if(this.queryFilters.ContainsKey(PRICE_KEY)) {
-                this.queryFilters[PRICE_KEY] += "," + filterToAdd;
+            if (this.queryFilters.ContainsKey(PRICE_KEY)) {
+
+                List<String> splitPriceFilters = this.queryFilters[PRICE_KEY].Split(',').ToList();
+
+                if (!splitPriceFilters.Contains(filterToAdd)) {
+                    splitPriceFilters.Add(filterToAdd);
+                    List<String> sortedPriceFilters = splitPriceFilters.OrderBy(q => q).ToList();
+
+                    this.queryFilters[PRICE_KEY] = String.Join(",", sortedPriceFilters);
+                }
+
             } else {
                 this.queryFilters.Add(PRICE_KEY, filterToAdd);
             }
@@ -221,30 +261,13 @@ namespace Random_Restaurant_Picker.Models {
         public void removePrice(String priceToRemove) {
 
             if (priceToRemove == null) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_NULL);
+                throw new System.ArgumentException(ErrorMessages.ErrorMessages.PRICE_TO_REMOVE_CANNOT_BE_NULL);
             }
             if (priceToRemove.IsEmpty()) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_EMPTY);
+                throw new System.ArgumentException(ErrorMessages.ErrorMessages.PRICE_TO_REMOVE_CANNOT_BE_EMPTY);
             }
 
-            if (this.queryFilters.ContainsKey(PRICE_KEY)) {
-                String[] split_price_value = this.queryFilters[PRICE_KEY].Split(',');
-
-                if (split_price_value.Length <= 1) {
-                    this.queryFilters.Remove(PRICE_KEY);
-                }
-                else {
-                    String updated_price_values = "";
-
-                    foreach (String value in split_price_value) {
-                        if (value != priceToRemove) {
-                            updated_price_values += value + ",";
-                        }
-                    }
-
-                    this.queryFilters[PRICE_KEY] = updated_price_values;
-                }
-            }
+            removeCommaSeperatedValues(PRICE_KEY, priceToRemove);
         }
 
         /**
@@ -265,6 +288,9 @@ namespace Random_Restaurant_Picker.Models {
             if (filterToAdd.IsEmpty()) {
                 throw new System.ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_EMPTY);
             }
+            if (!verifyBoolean(filterToAdd)) {
+                throw new System.ArgumentException(ErrorMessages.ErrorMessages.OPEN_NOW_IS_NOT_IN_CORRECT_FORMAT);
+            }
 
             this.queryFilters.Add(OPEN_NOW_KEY, filterToAdd);
         }
@@ -281,7 +307,7 @@ namespace Random_Restaurant_Picker.Models {
         }
 
         /**
-         * Adds the handicap accessible attribute as a filter. Because it is a parameter of the api query it is added to the queryFilters dictionary
+         * Adds the attributes as a filter. Because it is a parameter of the api query it is added to the queryFilters dictionary
          * 
          * @precondition 
          *      filterToAdd           != null
@@ -290,7 +316,7 @@ namespace Random_Restaurant_Picker.Models {
          * @postcondition
          *      this.queryFilters.Count == this.queryFilters.Count + 1
          **/
-        public void addHandicapAccessible(String filterToAdd) {
+        public void addAttribute(String filterToAdd) {
 
             if (filterToAdd == null) {
                 throw new System.ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_NULL);
@@ -298,85 +324,29 @@ namespace Random_Restaurant_Picker.Models {
             if (filterToAdd.IsEmpty()) {
                 throw new System.ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_EMPTY);
             }
+            if (this.queryFilters.ContainsKey(ATTRIBUTES_KEY)) {
 
-            this.queryFilters.Add(WHEELCHAIR_ACCESSIBLE_KEY, filterToAdd);
-        }
+                String[] splitAttributes = this.queryFilters[ATTRIBUTES_KEY].Split(',');
 
-        /**
-         * Removes the handicap accessible as a filter
-         * 
-         * @precondition none
-         * @postcondition this.queryFilters.Count = this.queryFilters.Count - 1
-         **/
+                if(!splitAttributes.Contains(filterToAdd)) {
+                    this.queryFilters[ATTRIBUTES_KEY] += "," + filterToAdd;
+                }
 
-        public void removeHandicapAccessible() {
-            this.queryFilters.Remove(WHEELCHAIR_ACCESSIBLE_KEY);
-        }
-
-        /**
-         * Adds the accepts reservations attribute as a filter. Because it is a parameter of the api query it is added to the queryFilters dictionary
-         * 
-         * @precondition 
-         *      filterToAdd           != null
-         *      filterToAdd.isEmpty() == False
-         *      
-         * @postcondition
-         *      this.queryFilters.Count == this.queryFilters.Count + 1
-         **/
-        public void addAcceptsReservations(String filterToAdd) {
-
-            if (filterToAdd == null) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_NULL);
+            } else {
+                this.queryFilters.Add(ATTRIBUTES_KEY, filterToAdd);
             }
-            if (filterToAdd.IsEmpty()) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_EMPTY);
+        }
+
+        public void removeAttribute(String attributeToRemove) {
+
+            if (attributeToRemove == null) {
+                throw new System.ArgumentException(ErrorMessages.ErrorMessages.ATTRIBUTE_TO_REMOVE_CANNOT_BE_NULL);
+            }
+            if (attributeToRemove.IsEmpty()) {
+                throw new System.ArgumentException(ErrorMessages.ErrorMessages.ATTRIBUTE_TO_REMOVE_CANNOT_BE_EMPTY);
             }
 
-            this.queryFilters.Add(ACCEPTS_RESERVATIONS_KEY, filterToAdd);
-        }
-
-        /**
-         * Removes the accepts reservations as a filter
-         * 
-         * @precondition none
-         * @postcondition this.queryFilters.Count = this.queryFilters.Count - 1
-         **/
-
-        public void removeAcceptsReservations() {
-            this.queryFilters.Remove(ACCEPTS_RESERVATIONS_KEY);
-        }
-
-        /**
-         * Adds the new restaurants attribute as a filter. Because it is a parameter of the api query it is added to the queryFilters dictionary
-         * 
-         * @precondition 
-         *      filterToAdd           != null
-         *      filterToAdd.isEmpty() == False
-         *      
-         * @postcondition
-         *      this.queryFilters.Count == this.queryFilters.Count + 1
-         **/
-        public void addNewRestaurants(String filterToAdd) {
-
-            if (filterToAdd == null) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_NULL);
-            }
-            if (filterToAdd.IsEmpty()) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_EMPTY);
-            }
-
-            this.queryFilters.Add(NEW_RESTAURANTS_KEY, filterToAdd);
-        }
-
-        /**
-         * Removes the new restaurants as a filter
-         * 
-         * @precondition none
-         * @postcondition this.queryFilters.Count = this.queryFilters.Count - 1
-         **/
-
-        public void removeAddNewRestaurants() {
-            this.queryFilters.Remove(NEW_RESTAURANTS_KEY);
+            removeCommaSeperatedValues(ATTRIBUTES_KEY, attributeToRemove);
         }
 
         /**
@@ -397,6 +367,9 @@ namespace Random_Restaurant_Picker.Models {
             if (filterToAdd.IsEmpty()) {
                 throw new System.ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_EMPTY);
             }
+            if (!verifyReviewScore(filterToAdd)) {
+                throw new System.ArgumentException(ErrorMessages.ErrorMessages.REVIEW_SCORE_IS_NOT_IN_CORRECT_FORMAT);
+            }
 
             this.nonQueryFilters.Add(REVIEW_SCORE_KEY, filterToAdd);
         }
@@ -409,10 +382,84 @@ namespace Random_Restaurant_Picker.Models {
          **/
 
         public void removeReviewScore() {
-            this.queryFilters.Remove(REVIEW_SCORE_KEY);
+            this.nonQueryFilters.Remove(REVIEW_SCORE_KEY);
         }
 
+        /**
+         * Provides the string representation of the filters class
+         * 
+         * @precondition none
+         * @postcondition none
+         * 
+         * @return toString the string representation of the filters class
+         **/
+
+        public String toString() {
+
+            String toString = "Query Filters:\n";
+
+            foreach(String key in this.queryFilters.Keys) {
+                toString += key + " " + this.queryFilters[key] + "\n";
+            }
+
+            toString += "Non Query Filters:\n"; 
+
+            foreach(String key in this.nonQueryFilters.Keys) {
+                toString += key + " " + this.nonQueryFilters[key] + "\n";
+            }
+
+            return toString;
+        }
+
+        private static Boolean verifyRadius(String radiusToVerify) {
+
+            Regex validRadiusRegex = new Regex(@"^([0-9]){1,}$");
+
+            Boolean isValid = validRadiusRegex.IsMatch(radiusToVerify);
+
+            return isValid;
+        }
+
+        private static Boolean verifyPrice(String priceToVerify) {
+
+            Regex validPriceRegex = new Regex(@"^((1|2|3|4)(,(1|2|3|4)){0,3})$");
+
+            Boolean isValid = validPriceRegex.IsMatch(priceToVerify);
+
+            return isValid;
+        }
+
+        private static Boolean verifyBoolean(String booleanToVerify) {
+
+            Regex validBooleanRegex = new Regex(@"^(true)$");
+
+            Boolean isValid = validBooleanRegex.IsMatch(booleanToVerify);
+
+            return isValid;
+        }
+
+        private static Boolean verifyReviewScore(String reviewScoreToVerify) {
+
+            Regex validBooleanRegex = new Regex(@"^(([1-5])|([1-4].[0-9])|([5].0))$");
+
+            Boolean isValid = validBooleanRegex.IsMatch(reviewScoreToVerify);
+
+            return isValid;
+        }
+
+        private void removeCommaSeperatedValues(String key, String valueToRemove) {
+
+            if (this.queryFilters.ContainsKey(key)) {
+                List<String> split_value = this.queryFilters[key].Split(',').ToList();
+                split_value.Remove(valueToRemove);
+
+                if (split_value.Count() == 0) {
+                    this.queryFilters.Remove(key);
+                }
+                else {
+                    this.queryFilters[key] = String.Join(",", split_value);
+                }
+            }
+        }
     }
 }
- 
- 

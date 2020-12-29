@@ -48,5 +48,15 @@ namespace Random_Restaurant_Picker.ErrorMessages {
         public static readonly String FILTER_TO_ADD_CANNOT_BE_NULL = "The filter to add cannot be null";
         public static readonly String FILTER_TO_ADD_CANNOT_BE_EMPTY = "The filter to add cannot be null";
         public static readonly String PRICE_TO_REMOVE_CANNOT_BE_NULL = "The price to remove cannot be null";
+        public static readonly String PRICE_TO_REMOVE_CANNOT_BE_EMPTY = "The price to remove cannot be empty";
+        public static readonly String RADIUS_TO_ADD_IS_NOT_IN_CORRECT_FORMAT = "The radius to add is not in the correct format";
+        public static readonly String PRICE_TO_ADD_IS_NOT_IN_CORRECT_FORMAT = "The price to add is not in the correct format";
+        public static readonly String OPEN_NOW_IS_NOT_IN_CORRECT_FORMAT = "The open now field is not in correct format";
+        public static readonly String ATTRIBUTE_TO_REMOVE_CANNOT_BE_NULL = "The attribute to remove cannot be null";
+        public static readonly String ATTRIBUTE_TO_REMOVE_CANNOT_BE_EMPTY = "The attribute to remove cannot be empty";
+        public static readonly String HANDICAP_ACCESSIBLE_IS_NOT_IN_CORRECT_FORMAT = "The handicap accessible field is not in the correct format";
+        public static readonly String ACCEPTS_RESERVATIONS_IS_NOT_IN_CORRECT_FORMAT = "The accepts reservations field is not in the correct format";
+        public static readonly String NEW_RESTAURANTS_IS_NOT_IN_CORRECT_FORMAT = "The new restaurants field is not in the correct format";
+        public static readonly String REVIEW_SCORE_IS_NOT_IN_CORRECT_FORMAT = "The review score field is not in the correct format";
     }
 }
