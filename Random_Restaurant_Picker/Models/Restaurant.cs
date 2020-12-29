@@ -231,9 +231,10 @@ namespace Random_Restaurant_Picker.Models {
          * @return the string representation of the restaurant object
          **/
        
-        public String toString() {
+        public override String ToString() {
             return "Restaurant (name: " + this.getName() + " price: " + this.getPrice() + " location: " + this.getLocation() + " hours: " + this.getHours() + " distance: " + this.getDistance() + " review score: " + this.getReviewScore() + " review count: " + this.getReviewCount() + " menu URL: " + this.getMenuURL() + " image URL: " + this.getImageURL() + " id: " + this.getId() + ')';
         }
+
         private static void checkPreconditions(String name, String price, String location, String hours, String distance, double reviewScore, int reviewCount, String menuURL, String imageURL, String id) {
             if (name == null) {
                 throw new System.ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_NAME_CANNOT_BE_NULL);

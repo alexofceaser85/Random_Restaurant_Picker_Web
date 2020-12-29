@@ -21,7 +21,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantManager {
 
             theManager.pickRandomRestaurant(0, theManager.getNumberOfRestaurants());
 
-            Assert.AreEqual("Restaurant (name: Katy Lou's price: $$$ location: Senoia GA hours: 8:00 - 6:00 distance: 0 Miles review score: 4.9 review count: 3 menu URL: MenuURL.com image URL: ImageURL.com id: 6)", theManager.getRandomRestaurant().toString());
+            Assert.AreEqual("Restaurant (name: Katy Lou's price: $$$ location: Senoia GA hours: 8:00 - 6:00 distance: 0 Miles review score: 4.9 review count: 3 menu URL: MenuURL.com image URL: ImageURL.com id: 6)", theManager.getRandomRestaurant().ToString());
         }
     }
 }

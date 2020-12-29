@@ -153,7 +153,7 @@ namespace Random_Restaurant_Picker.Models {
             String managerString = "";
 
             foreach(Restaurant theRestaurant in this.theRestaurants) {
-                managerString += theRestaurant.toString() + "\n";
+                managerString += theRestaurant.ToString() + "\n";
             }
 
             return managerString;

@@ -47,7 +47,7 @@ namespace Random_Restaurant_Picker_Tests {
 
             theManager.addRestaurant(theRestaurant);
 
-            Assert.AreEqual("Restaurant (name: Matt's Pizza price: $ location: Senoia GA hours: 9:00 - 5:00 distance: 5 Miles review score: 4.5 review count: 5 menu URL: MenuURL.com image URL: ImageURL.com id: 5)", theManager.pickRandomRestaurant(0, 0).toString());
+            Assert.AreEqual("Restaurant (name: Matt's Pizza price: $ location: Senoia GA hours: 9:00 - 5:00 distance: 5 Miles review score: 4.5 review count: 5 menu URL: MenuURL.com image URL: ImageURL.com id: 5)", theManager.pickRandomRestaurant(0, 0).ToString());
         }
 
         [TestMethod]
@@ -63,7 +63,7 @@ namespace Random_Restaurant_Picker_Tests {
             theManager.addRestaurant(secondRestaurant);
             theManager.addRestaurant(thirdRestaurant);
 
-            Assert.AreEqual("Restaurant (name: Katy Lou's price: $$$ location: Senoia GA hours: 8:00 - 6:00 distance: 0 Miles review score: 4.9 review count: 3 menu URL: MenuURL.com image URL: ImageURL.com id: 6)", theManager.pickRandomRestaurant(1, 1).toString());
+            Assert.AreEqual("Restaurant (name: Katy Lou's price: $$$ location: Senoia GA hours: 8:00 - 6:00 distance: 0 Miles review score: 4.9 review count: 3 menu URL: MenuURL.com image URL: ImageURL.com id: 6)", theManager.pickRandomRestaurant(1, 1).ToString());
         }
 
         [TestMethod]
@@ -85,7 +85,7 @@ namespace Random_Restaurant_Picker_Tests {
             theManager.addRestaurant(fifthRestaurant);
             theManager.addRestaurant(sixthRestaurant);
 
-            Assert.AreEqual("Restaurant (name: Katy Lou's price: $$$ location: Senoia GA hours: 8:00 - 6:00 distance: 0 Miles review score: 4.9 review count: 3 menu URL: MenuURL.com image URL: ImageURL.com id: 6)", theManager.pickRandomRestaurant(3, 3).toString());
+            Assert.AreEqual("Restaurant (name: Katy Lou's price: $$$ location: Senoia GA hours: 8:00 - 6:00 distance: 0 Miles review score: 4.9 review count: 3 menu URL: MenuURL.com image URL: ImageURL.com id: 6)", theManager.pickRandomRestaurant(3, 3).ToString());
         }
     }
 }
