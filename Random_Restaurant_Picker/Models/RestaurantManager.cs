@@ -18,6 +18,7 @@ namespace Random_Restaurant_Picker.Models {
         private static readonly int MINIMUM_INDEX = 0;
 
         private List<Restaurant> theRestaurants;
+        private Restaurant theRandomRestaurant;
         private Random random;
 
         /**
@@ -30,6 +31,19 @@ namespace Random_Restaurant_Picker.Models {
         public RestaurantManager() {
             this.theRestaurants = new List<Restaurant>();
             this.random = new Random();
+        }
+
+        /**
+         * Gets the random restaurant
+         * 
+         * @precondition none
+         * @postcondition none
+         * 
+         * @return the random restaurant or null if the random restaurant is not assigned
+         **/
+
+        public Restaurant getRandomRestaurant() {
+            return this.theRandomRestaurant;
         }
 
         /**
@@ -121,7 +135,7 @@ namespace Random_Restaurant_Picker.Models {
 
             int randomIndex = this.random.Next(minimumRandomIndex, maximumRandomIndex);
             Restaurant theRandomRestaurant = this.theRestaurants[randomIndex];
-
+            this.theRandomRestaurant = theRandomRestaurant;
             return theRandomRestaurant;
         }
 

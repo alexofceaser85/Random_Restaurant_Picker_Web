@@ -69,6 +69,7 @@
     <Compile Include="TestsForRestaurantFilters\RemoveDictionaryItem\TestRemoveTerm.cs" />
     <Compile Include="TestsForRestaurantManager\TestAddRestaurant.cs" />
     <Compile Include="TestsForRestaurantManager\TestGetNumberOfRestaurants.cs" />
+    <Compile Include="TestsForRestaurantManager\TestGetRandomRestaurant.cs" />
     <Compile Include="TestsForRestaurantManager\TestPickRandomRestaurant.cs" />
     <Compile Include="TestsForRestaurantManager\TestRemoveRestaurant.cs" />
     <Compile Include="TestsForRestaurant\TestRestaurantConstructor.cs" />
