@@ -148,6 +148,7 @@ namespace Random_Restaurant_Picker.Models {
          * @return managerString the restring representation of the restaurant manager
          **/
 
+
         public String toString() {
 
             String managerString = "";

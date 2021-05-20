@@ -58,5 +58,10 @@ namespace Random_Restaurant_Picker.ErrorMessages {
         public static readonly String ACCEPTS_RESERVATIONS_IS_NOT_IN_CORRECT_FORMAT = "The accepts reservations field is not in the correct format";
         public static readonly String NEW_RESTAURANTS_IS_NOT_IN_CORRECT_FORMAT = "The new restaurants field is not in the correct format";
         public static readonly String REVIEW_SCORE_IS_NOT_IN_CORRECT_FORMAT = "The review score field is not in the correct format";
+
+        //The error messages for the restaurant query class
+
+        public static readonly String FILTERS_TO_QUERY_CANNOT_BE_NULL = "The filters to add to the query cannot be null";
+        public static readonly String RESTAURANT_MANAGER_FOR_QUERY_CANNOT_BE_NULL = "The restaurant manager for the query cannot be null";
     }
 }

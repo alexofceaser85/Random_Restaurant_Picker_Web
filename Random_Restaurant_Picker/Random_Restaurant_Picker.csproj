@@ -117,7 +117,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API_Key\API_Key.cs" />
+    <Compile Include="API_Information\API_Key.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -129,6 +129,7 @@
     <Compile Include="Models\Restaurant.cs" />
     <Compile Include="Models\RestaurantFilters.cs" />
     <Compile Include="Models\RestaurantManager.cs" />
+    <Compile Include="Models\RestaurantsQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
