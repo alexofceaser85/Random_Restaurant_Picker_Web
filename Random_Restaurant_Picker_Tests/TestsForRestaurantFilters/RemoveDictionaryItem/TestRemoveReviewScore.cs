@@ -10,10 +10,10 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters.RemoveDiction
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.removeReviewScore();
+            theFilters.RemoveReviewScore();
 
             Assert.AreEqual("Query Filters:\n"
-                + "Non Query Filters:\n", theFilters.toString());
+                + "Non Query Filters:\n", theFilters.ToString());
         }
 
         [TestMethod]
@@ -21,12 +21,12 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters.RemoveDiction
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addReviewScore("4");
+            theFilters.AddReviewScore("4");
 
-            theFilters.removeReviewScore();
+            theFilters.RemoveReviewScore();
 
             Assert.AreEqual("Query Filters:\n"
-                + "Non Query Filters:\n", theFilters.toString());
+                + "Non Query Filters:\n", theFilters.ToString());
         }
 
         [TestMethod]
@@ -34,16 +34,16 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters.RemoveDiction
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addReviewScore("4");
-            theFilters.addOpenNow("true");
-            theFilters.addRadius("5");
+            theFilters.AddReviewScore("4");
+            theFilters.AddOpenNow("true");
+            theFilters.AddRadius("5");
 
-            theFilters.removeReviewScore();
+            theFilters.RemoveReviewScore();
 
             Assert.AreEqual("Query Filters:\n"
                 + "open_now true\n"
                 + "radius 5\n"
-                + "Non Query Filters:\n", theFilters.toString());
+                + "Non Query Filters:\n", theFilters.ToString());
         }
 
         [TestMethod]
@@ -51,16 +51,16 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters.RemoveDiction
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addOpenNow("true");
-            theFilters.addReviewScore("4");
-            theFilters.addRadius("5");
+            theFilters.AddOpenNow("true");
+            theFilters.AddReviewScore("4");
+            theFilters.AddRadius("5");
 
-            theFilters.removeReviewScore();
+            theFilters.RemoveReviewScore();
 
             Assert.AreEqual("Query Filters:\n"
                 + "open_now true\n"
                 + "radius 5\n"
-                + "Non Query Filters:\n", theFilters.toString());
+                + "Non Query Filters:\n", theFilters.ToString());
         }
 
         [TestMethod]
@@ -68,16 +68,16 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters.RemoveDiction
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addOpenNow("true");
-            theFilters.addRadius("5");
-            theFilters.addReviewScore("4");
+            theFilters.AddOpenNow("true");
+            theFilters.AddRadius("5");
+            theFilters.AddReviewScore("4");
 
-            theFilters.removeReviewScore();
+            theFilters.RemoveReviewScore();
 
             Assert.AreEqual("Query Filters:\n"
                 + "open_now true\n"
                 + "radius 5\n"
-                + "Non Query Filters:\n", theFilters.toString());
+                + "Non Query Filters:\n", theFilters.ToString());
         }
     }
 }

@@ -2,464 +2,499 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Web;
-using System.Web.Mvc;
 using System.Web.WebPages;
 
 namespace Random_Restaurant_Picker.Models {
-
-    /**
-     * The class manages the filters for finding a restaurant
-     * 
-     * @author Alex DeCesare
-     * @version 24-Dec-2020
-     **/
-
+    /// <summary>
+    ///     The class manages the filters for finding a restaurant
+    /// </summary>
+    /// <author>
+    ///     Alex DeCesare
+    /// </author>
+    /// ///
+    /// <version>
+    ///     24-Dec-2020
+    /// </version>
     public class RestaurantFilters {
+        #region Data members
 
-        private Dictionary<String, String> queryFilters;
-        private Dictionary<String, String> nonQueryFilters;
+        private const string TermKey = "term";
+        private const string LocationKey = "location";
+        private const string RadiusKey = "radius";
+        private const string FoodCategoriesKey = "categories";
+        private const string PriceKey = "price";
+        private const string OpenNowKey = "open_now";
+        private const string AttributesKey = "attributes";
+        private const string ReviewScoreKey = "review_score";
+        private readonly Dictionary<string, string> queryFilters;
+        private readonly Dictionary<string, string> nonQueryFilters;
 
-        private static readonly String TERM_KEY = "term";
-        private static readonly String LOCATION_KEY = "location";
-        private static readonly String RADIUS_KEY = "radius";
-        private static readonly String FOOD_CATAGORIES_KEY = "categories";
-        private static readonly String PRICE_KEY = "price";
-        private static readonly String OPEN_NOW_KEY = "open_now";
-        private static readonly String ATTRIBUTES_KEY = "attributes";
-        private static readonly String REVIEW_SCORE_KEY = "review_score";
+        #endregion
 
-        /**
-         * The constructor for the filters.
-         * 
-         * @precondition none
-         * @postcondition 
-         *      this.queryFilters == new Dictionary<string, string>()
-         *      this.nonQueryFilters == new Dictionary<string, string>()
-         **/
+        #region Constructors
 
+        /// <summary>
+        ///     The constructor for the filters.
+        /// </summary>
+        /// <precondition>none</precondition>
+        /// <postcondition>
+        ///     this.queryFilters EQUALS new Dictionary&lt;string, string>&gt;()
+        ///     this.nonQueryFilters EQUALS new Dictionary&lt;string, string>&gt;()
+        /// </postcondition>
         public RestaurantFilters() {
-            this.queryFilters = new Dictionary<String, String>();
-            this.nonQueryFilters = new Dictionary<String, String>();
+            this.queryFilters = new Dictionary<string, string>();
+            this.nonQueryFilters = new Dictionary<string, string>();
         }
 
-        /**
-         * Gets the query filters dictionary
-         * 
-         * @precondition none
-         * @postcondition none
-         * 
-         * @return the query filters dictionary
-         **/
+        #endregion
 
-        public Dictionary<String, String> getQueryFilters() {
+        #region Methods
+
+        /// <summary>
+        ///     Gets the query filters dictionary
+        /// </summary>
+        /// <precondition>none</precondition>
+        /// <postcondition>none</postcondition>
+        /// <returns>the query filters dictionary</returns>
+        public Dictionary<string, string> GetQueryFilters() {
             return this.queryFilters;
         }
 
-        /**
-         * Gets the non query filters dictionary
-         * 
-         * @precondition none
-         * @postcondition none
-         * 
-         * @return the non query filters dictionary
-         **/
-
-        public Dictionary<String, String> getNonQueryFilters() {
+        /// <summary>
+        ///     Gets the non query filters dictionary
+        /// </summary>
+        /// <precondition>none</precondition>
+        /// <postcondition>none</postcondition>
+        /// <returns>the non query filters dictionary</returns>
+        public Dictionary<string, string> GetNonQueryFilters() {
             return this.queryFilters;
         }
 
-        /**
-         * Adds the term as a filter. Because it is a parameter of the api query it is added to the queryFilters dictionary
-         * 
-         * @precondition 
-         *      filterToAdd           != null
-         *      filterToAdd.isEmpty() == False
-         *      
-         * @postcondition
-         *      this.queryFilters.Count == this.queryFilters.Count + 1
-         **/
-
-        public void addTerm(String filterToAdd) {
-
-            if(filterToAdd == null) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_NULL);
-            }
-            if(filterToAdd.IsEmpty()) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_EMPTY);
-            }
-
-            this.queryFilters.Add(TERM_KEY, filterToAdd);
-        }
-
-        /**
-         * Removes the term as a filter
-         * 
-         * @precondition none
-         * @postcondition this.queryFilters.Count = this.queryFilters.Count - 1
-         **/
-
-        public void removeTerm() {
-            this.queryFilters.Remove(TERM_KEY);
-        }
-
-        /**
-         * Adds the location as a filter. Because it is a parameter of the api query it is added to the queryFilters dictionary
-         * 
-         * @precondition 
-         *      filterToAdd           != null
-         *      filterToAdd.isEmpty() == False
-         *      
-         * @postcondition
-         *      this.queryFilters.Count == this.queryFilters.Count + 1
-         **/
-
-        public void addLocation(String filterToAdd) {
-
+        /// <summary>
+        ///     Adds the term as a filter. Because it is a parameter of the api query it is added to the queryFilters dictionary
+        /// </summary>
+        /// <precondition>
+        ///     filterToAdd           DOES NOT EQUAL null
+        ///     filterToAdd.isEmpty() EQUALS False
+        /// </precondition>
+        /// <postcondition>
+        ///     this.queryFilters.Count EQUALS this.queryFilters.Count + 1
+        /// </postcondition>
+        /// <param name="filterToAdd">The term filter to add</param>
+        /// <exception cref="ArgumentException">
+        /// </exception>
+        public void AddTerm(string filterToAdd) {
             if (filterToAdd == null) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_NULL);
+                throw new ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_NULL);
             }
+
             if (filterToAdd.IsEmpty()) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_EMPTY);
+                throw new ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_EMPTY);
             }
 
-            this.queryFilters.Add(LOCATION_KEY, filterToAdd);
+            this.queryFilters.Add(TermKey, filterToAdd);
         }
 
-        /**
-         * Removes the location as a filter
-         * 
-         * @precondition none
-         * @postcondition this.queryFilters.Count = this.queryFilters.Count - 1
-         **/
-
-        public void removeLocation() {
-            this.queryFilters.Remove(LOCATION_KEY);
+        /// <summary>
+        ///     Removes the term as a filter
+        /// </summary>
+        /// <precondition>none</precondition>
+        /// <postcondition>
+        ///     this.queryFilters.Count EQUALS this.queryFilters.Count - 1
+        /// </postcondition>
+        public void RemoveTerm() {
+            this.queryFilters.Remove(TermKey);
         }
 
-        /**
-         * Adds the radius as a filter. Because it is a parameter of the api query it is added to the queryFilters dictionary
-         * 
-         * @precondition 
-         *      filterToAdd           != null
-         *      filterToAdd.isEmpty() == False
-         *      
-         * @postcondition
-         *      this.queryFilters.Count == this.queryFilters.Count + 1
-         **/
-
-        public void addRadius(String filterToAdd) {
-
+        /// <summary>
+        ///     Adds the location as a filter. Because it is a parameter of the api query it is added to the queryFilters
+        ///     dictionary
+        /// </summary>
+        /// <precondition>
+        ///     filterToAdd           DOES NOT EQUAL null
+        ///     filterToAdd.isEmpty() EQUALS False
+        /// </precondition>
+        /// <postcondition>
+        ///     this.queryFilters.Count EQUALS this.queryFilters.Count + 1
+        /// </postcondition>
+        /// <param name="filterToAdd">the location filter to add</param>
+        /// <exception cref="ArgumentException">
+        /// </exception>
+        public void AddLocation(string filterToAdd) {
             if (filterToAdd == null) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_NULL);
+                throw new ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_NULL);
             }
+
             if (filterToAdd.IsEmpty()) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_EMPTY);
+                throw new ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_EMPTY);
             }
+
+            this.queryFilters.Add(LocationKey, filterToAdd);
+        }
+
+        /// <summary>
+        ///     Removes the location as a filter
+        /// </summary>
+        /// <precondition>
+        ///     none
+        /// </precondition>
+        /// <postcondition>
+        ///     this.queryFilters.Count EQUALS this.queryFilters.Count - 1
+        /// </postcondition>
+        public void RemoveLocation() {
+            this.queryFilters.Remove(LocationKey);
+        }
+
+        /// <summary>
+        ///     Adds the radius as a filter. Because it is a parameter of the api query it is added to the queryFilters dictionary
+        /// </summary>
+        /// <precondition>
+        ///     filterToAdd           DOES NOT EQUAL null
+        ///     filterToAdd.isEmpty() EQUALS False
+        /// </precondition>
+        /// <postcondition>
+        ///     this.queryFilters.Count EQUALS this.queryFilters.Count + 1
+        /// </postcondition>
+        /// <param name="filterToAdd">The radius filter to add.</param>
+        /// <exception cref="ArgumentException">
+        /// </exception>
+
+        public void AddRadius(string filterToAdd) {
+            if (filterToAdd == null) {
+                throw new ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_NULL);
+            }
+
+            if (filterToAdd.IsEmpty()) {
+                throw new ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_EMPTY);
+            }
+
             if (!verifyRadius(filterToAdd)) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.RADIUS_TO_ADD_IS_NOT_IN_CORRECT_FORMAT);
+                throw new ArgumentException(ErrorMessages.ErrorMessages.RADIUS_TO_ADD_IS_NOT_IN_CORRECT_FORMAT);
             }
 
-            this.queryFilters.Add(RADIUS_KEY, filterToAdd);
+            this.queryFilters.Add(RadiusKey, filterToAdd);
         }
 
-        /**
-         * Removes the radius as a filter
-         * 
-         * @precondition none
-         * @postcondition this.queryFilters.Count = this.queryFilters.Count - 1
-         **/
-
-        public void removeRadius() {
-            this.queryFilters.Remove(RADIUS_KEY);
+        /// <summary>
+        ///     Removes the radius as a filter
+        /// </summary>
+        /// <precondition>
+        ///     none
+        /// </precondition>
+        /// <postcondition>
+        ///     this.queryFilters.Count EQUALS this.queryFilters.Count - 1
+        /// </postcondition>
+        public void RemoveRadius() {
+            this.queryFilters.Remove(RadiusKey);
         }
 
-        /**
-         * Adds the food catagories as a filter. Because it is a parameter of the api query it is added to the queryFilters dictionary
-         * 
-         * @precondition 
-         *      filterToAdd           != null
-         *      filterToAdd.isEmpty() == False
-         *      
-         * @postcondition
-         *      this.queryFilters.Count == this.queryFilters.Count + 1
-         **/
-        public void addFoodCatagory(String filterToAdd) {
-
+        /// <summary>
+        ///     Adds the food category as a filter. Because it is a parameter of the api query it is added to the queryFilters
+        ///     dictionary
+        /// </summary>
+        /// <precondition>
+        ///     filterToAdd           DOES NOT EQUAL null
+        ///     filterToAdd.isEmpty() EQUALS False
+        /// </precondition>
+        /// <postcondition>
+        ///     this.queryFilters.Count EQUALS this.queryFilters.Count + 1
+        /// </postcondition>
+        /// <param name="filterToAdd">The filter to add.</param>
+        /// <exception cref="ArgumentException">
+        /// </exception>
+        public void AddFoodCategory(string filterToAdd) {
             if (filterToAdd == null) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_NULL);
+                throw new ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_NULL);
             }
+
             if (filterToAdd.IsEmpty()) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_EMPTY);
+                throw new ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_EMPTY);
             }
 
-            this.queryFilters.Add(FOOD_CATAGORIES_KEY, filterToAdd);
+            this.queryFilters.Add(FoodCategoriesKey, filterToAdd);
         }
 
-        /**
-         * Removes the food catagory as a filter
-         * 
-         * @precondition none
-         * @postcondition this.queryFilters.Count = this.queryFilters.Count - 1
-         **/
-
-        public void removeFoodCatagory() {
-            this.queryFilters.Remove(FOOD_CATAGORIES_KEY);
+        /// <summary>
+        ///     Removes the food category as a filter
+        /// </summary>
+        /// <precondition>none</precondition>
+        /// <postcondition>
+        ///     this.queryFilters.Count EQUALS this.queryFilters.Count - 1
+        /// </postcondition>
+        public void RemoveFoodCategory() {
+            this.queryFilters.Remove(FoodCategoriesKey);
         }
 
-        /**
-         * Adds the price as a filter. Because it is a parameter of the api query it is added to the queryFilters dictionary
-         * The price could either be one value etc. 1, which is equal to $, or multiple values etc. 1,2,3 which is $,$$,$$$
-         * Because of that the method checks if it needs to add onto the existing price values or make a new price key
-         * 
-         * @precondition 
-         *      filterToAdd           != null
-         *      filterToAdd.isEmpty() == False
-         *      
-         * @postcondition
-         *      this.queryFilters.Count == this.queryFilters.Count + 1
-         **/
-        public void addPrice(String filterToAdd) {
-
+        /// <summary>
+        ///     Adds the price as a filter. Because it is a parameter of the api query it is added to the queryFilters dictionary
+        ///     The price could either be one value etc. 1, which is equal to $, or multiple values etc. 1,2,3 which is $,$$,$$$
+        ///     Because of that the method checks if it needs to add onto the existing price values or make a new price key
+        /// </summary>
+        /// <precondition>
+        ///     filterToAdd           DOES NOT EQUAL null
+        ///     filterToAdd.isEmpty() EQUALS False
+        /// </precondition>
+        /// <postcondition>
+        ///     this.queryFilters.Count EQUALS this.queryFilters.Count + 1
+        /// </postcondition>
+        /// <param name="filterToAdd">The price filter to add.</param>
+        /// <exception cref="ArgumentException">
+        /// </exception>
+        public void AddPrice(string filterToAdd) {
             if (filterToAdd == null) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_NULL);
+                throw new ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_NULL);
             }
+
             if (filterToAdd.IsEmpty()) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_EMPTY);
+                throw new ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_EMPTY);
             }
+
             if (!verifyPrice(filterToAdd)) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.PRICE_TO_ADD_IS_NOT_IN_CORRECT_FORMAT);
+                throw new ArgumentException(ErrorMessages.ErrorMessages.PRICE_TO_ADD_IS_NOT_IN_CORRECT_FORMAT);
             }
 
-            if (this.queryFilters.ContainsKey(PRICE_KEY)) {
-
-                List<String> splitPriceFilters = this.queryFilters[PRICE_KEY].Split(',').ToList();
+            if (this.queryFilters.ContainsKey(PriceKey)) {
+                var splitPriceFilters = this.queryFilters[PriceKey].Split(',').ToList();
 
                 if (!splitPriceFilters.Contains(filterToAdd)) {
                     splitPriceFilters.Add(filterToAdd);
-                    List<String> sortedPriceFilters = splitPriceFilters.OrderBy(q => q).ToList();
+                    var sortedPriceFilters = splitPriceFilters.OrderBy(q => q).ToList();
 
-                    this.queryFilters[PRICE_KEY] = String.Join(",", sortedPriceFilters);
+                    this.queryFilters[PriceKey] = string.Join(",", sortedPriceFilters);
                 }
-
-            } else {
-                this.queryFilters.Add(PRICE_KEY, filterToAdd);
+            }
+            else {
+                this.queryFilters.Add(PriceKey, filterToAdd);
             }
         }
 
-        /**
-         * Removes the price as a filter. Because the price could either be one value or multiple comma delimeted values
-         * The method checks if it needs to remove the price as a part of the dictionary or just one value.
-         * 
-         * @precondition 
-         *      priceToRemove           != null
-         *      priceToRemove.isEmpty() == False
-         * 
-         * @postcondition none
-         **/
-
-        public void removePrice(String priceToRemove) {
-
+        /// <summary>
+        ///     Removes the price as a filter. Because the price could either be one value or multiple comma delimited values
+        ///     The method checks if it needs to remove the price as a part of the dictionary or just one value.
+        /// </summary>
+        /// <precondition>
+        ///     priceToRemove           DOES NOT EQUAL null
+        ///     priceToRemove.isEmpty() EQUALS False
+        /// </precondition>
+        /// <postcondition>
+        ///     this.queryFilters.Count EQUALS this.queryFilters.Count - 1
+        /// </postcondition>
+        public void RemovePrice(string priceToRemove) {
             if (priceToRemove == null) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.PRICE_TO_REMOVE_CANNOT_BE_NULL);
+                throw new ArgumentException(ErrorMessages.ErrorMessages.PRICE_TO_REMOVE_CANNOT_BE_NULL);
             }
+
             if (priceToRemove.IsEmpty()) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.PRICE_TO_REMOVE_CANNOT_BE_EMPTY);
+                throw new ArgumentException(ErrorMessages.ErrorMessages.PRICE_TO_REMOVE_CANNOT_BE_EMPTY);
             }
 
-            removeCommaSeperatedValues(PRICE_KEY, priceToRemove);
+            this.removeCommaSeparatedValues(PriceKey, priceToRemove);
         }
 
-        /**
-         * Adds the open now boolean as a filter. Because it is a parameter of the api query it is added to the queryFilters dictionary
-         * 
-         * @precondition 
-         *      filterToAdd           != null
-         *      filterToAdd.isEmpty() == False
-         *      
-         * @postcondition
-         *      this.queryFilters.Count == this.queryFilters.Count + 1
-         **/
-        public void addOpenNow(String filterToAdd) {
-
+        /// <summary>
+        ///     Adds the open now boolean as a filter. Because it is a parameter of the api query it is added to the queryFilters
+        ///     dictionary
+        /// </summary>
+        /// <precondition>
+        ///     filterToAdd           DOES NOT EQUAL null
+        ///     filterToAdd.isEmpty() EQUALS False
+        /// </precondition>
+        /// <postcondition>
+        ///     this.queryFilters.Count EQUALS this.queryFilters.Count + 1
+        /// </postcondition>
+        /// <param name="filterToAdd">The open now filter to add.</param>
+        /// <exception cref="ArgumentException">
+        /// </exception>
+        public void AddOpenNow(string filterToAdd) {
             if (filterToAdd == null) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_NULL);
+                throw new ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_NULL);
             }
+
             if (filterToAdd.IsEmpty()) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_EMPTY);
+                throw new ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_EMPTY);
             }
+
             if (!verifyBoolean(filterToAdd)) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.OPEN_NOW_IS_NOT_IN_CORRECT_FORMAT);
+                throw new ArgumentException(ErrorMessages.ErrorMessages.OPEN_NOW_IS_NOT_IN_CORRECT_FORMAT);
             }
 
-            this.queryFilters.Add(OPEN_NOW_KEY, filterToAdd);
+            this.queryFilters.Add(OpenNowKey, filterToAdd);
         }
 
-        /**
-         * Removes the open now as a filter
-         * 
-         * @precondition none
-         * @postcondition this.queryFilters.Count = this.queryFilters.Count - 1
-         **/
-
-        public void removeOpenNow() {
-            this.queryFilters.Remove(OPEN_NOW_KEY);
+        /// <summary>
+        ///     Removes open now as a filter
+        /// </summary>
+        /// <precondition>none</precondition>
+        /// <postcondition>
+        ///     this.queryFilters.Count EQUALS this.queryFilters.Count - 1
+        /// </postcondition>
+        public void RemoveOpenNow() {
+            this.queryFilters.Remove(OpenNowKey);
         }
 
-        /**
-         * Adds the attributes as a filter. Because it is a parameter of the api query it is added to the queryFilters dictionary
-         * 
-         * @precondition 
-         *      filterToAdd           != null
-         *      filterToAdd.isEmpty() == False
-         *      
-         * @postcondition
-         *      this.queryFilters.Count == this.queryFilters.Count + 1
-         **/
-        public void addAttribute(String filterToAdd) {
-
+        /// <summary>
+        ///     Adds the attributes as a filter. Because it is a parameter of the api query it is added to the queryFilters
+        ///     dictionary
+        /// </summary>
+        /// <precondition>
+        ///     filterToAdd           DOES NOT EQUAL null
+        ///     filterToAdd.isEmpty() EQUALS False
+        /// </precondition>
+        /// <postcondition>
+        ///     this.queryFilters.Count EQUALS this.queryFilters.Count + 1
+        /// </postcondition>
+        /// <param name="filterToAdd">The attribute filter to add.</param>
+        /// <exception cref="ArgumentException">
+        /// </exception>
+        public void AddAttribute(string filterToAdd) {
             if (filterToAdd == null) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_NULL);
+                throw new ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_NULL);
             }
+
             if (filterToAdd.IsEmpty()) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_EMPTY);
+                throw new ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_EMPTY);
             }
-            if (this.queryFilters.ContainsKey(ATTRIBUTES_KEY)) {
 
-                String[] splitAttributes = this.queryFilters[ATTRIBUTES_KEY].Split(',');
+            if (this.queryFilters.ContainsKey(AttributesKey)) {
+                var splitAttributes = this.queryFilters[AttributesKey].Split(',');
 
-                if(!splitAttributes.Contains(filterToAdd)) {
-                    this.queryFilters[ATTRIBUTES_KEY] += "," + filterToAdd;
+                if (!splitAttributes.Contains(filterToAdd)) {
+                    this.queryFilters[AttributesKey] += "," + filterToAdd;
                 }
-
-            } else {
-                this.queryFilters.Add(ATTRIBUTES_KEY, filterToAdd);
+            }
+            else {
+                this.queryFilters.Add(AttributesKey, filterToAdd);
             }
         }
 
-        public void removeAttribute(String attributeToRemove) {
-
+        /// <summary>
+        ///     Removes the attribute as a filter
+        /// </summary>
+        /// <precondition>none</precondition>
+        /// <postcondition>
+        ///     this.queryFilters.Count EQUALS this.queryFilters.Count - 1
+        /// </postcondition>
+        public void RemoveAttribute(string attributeToRemove) {
             if (attributeToRemove == null) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.ATTRIBUTE_TO_REMOVE_CANNOT_BE_NULL);
+                throw new ArgumentException(ErrorMessages.ErrorMessages.ATTRIBUTE_TO_REMOVE_CANNOT_BE_NULL);
             }
+
             if (attributeToRemove.IsEmpty()) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.ATTRIBUTE_TO_REMOVE_CANNOT_BE_EMPTY);
+                throw new ArgumentException(ErrorMessages.ErrorMessages.ATTRIBUTE_TO_REMOVE_CANNOT_BE_EMPTY);
             }
 
-            removeCommaSeperatedValues(ATTRIBUTES_KEY, attributeToRemove);
+            this.removeCommaSeparatedValues(AttributesKey, attributeToRemove);
         }
 
-        /**
-         * Adds the review score as a filter. Because it is unable to be a parameter of the api query it is added to the nonQueryFilters dictionary
-         * 
-         * @precondition 
-         *      filterToAdd           != null
-         *      filterToAdd.isEmpty() == False
-         *      
-         * @postcondition
-         *      this.queryFilters.Count == this.queryFilters.Count + 1
-         **/
-        public void addReviewScore(String filterToAdd) {
-
+        /// <summary>
+        ///     Adds the review score as a filter. Because it is unable to be a parameter of the api query it is added to the
+        ///     nonQueryFilters dictionary
+        /// </summary>
+        /// <precondition>
+        ///     filterToAdd           DOES NOT EQUAL null
+        ///     filterToAdd.isEmpty() EQUALS False
+        /// </precondition>
+        /// <postcondition>
+        ///     this.queryFilters.Count EQUALS this.queryFilters.Count + 1
+        /// </postcondition>
+        /// <param name="filterToAdd">The review score filter to add.</param>
+        /// <exception cref="ArgumentException">
+        /// </exception>
+        public void AddReviewScore(string filterToAdd) {
             if (filterToAdd == null) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_NULL);
+                throw new ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_NULL);
             }
+
             if (filterToAdd.IsEmpty()) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_EMPTY);
+                throw new ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_EMPTY);
             }
+
             if (!verifyReviewScore(filterToAdd)) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.REVIEW_SCORE_IS_NOT_IN_CORRECT_FORMAT);
+                throw new ArgumentException(ErrorMessages.ErrorMessages.REVIEW_SCORE_IS_NOT_IN_CORRECT_FORMAT);
             }
 
-            this.nonQueryFilters.Add(REVIEW_SCORE_KEY, filterToAdd);
+            this.nonQueryFilters.Add(ReviewScoreKey, filterToAdd);
         }
 
-        /**
-         * Removes the review score as a filter
-         * 
-         * @precondition none
-         * @postcondition this.queryFilters.Count = this.queryFilters.Count - 1
-         **/
-
-        public void removeReviewScore() {
-            this.nonQueryFilters.Remove(REVIEW_SCORE_KEY);
+        /// <summary>
+        ///     Removes the review score as a filter
+        /// </summary>
+        /// <precondition>none</precondition>
+        /// <postcondition>
+        ///     this.queryFilters.Count EQUALS this.queryFilters.Count - 1
+        /// </postcondition>
+        public void RemoveReviewScore() {
+            this.nonQueryFilters.Remove(ReviewScoreKey);
         }
 
-        /**
-         * Provides the string representation of the filters class
-         * 
-         * @precondition none
-         * @postcondition none
-         * 
-         * @return toString the string representation of the filters class
-         **/
+        /// <summary>
+        ///     Provides the string representation of the filters class
+        /// </summary>
+        /// <precondition>none</precondition>
+        /// <postcondition>none</postcondition>
+        /// <returns>ToString the string representation of the restaurants filters</returns>
+        public override string ToString() {
+            var toString = "Query Filters:\n";
 
-        public String toString() {
-
-            String toString = "Query Filters:\n";
-
-            foreach(String key in this.queryFilters.Keys) {
+            foreach (var key in this.queryFilters.Keys) {
                 toString += key + " " + this.queryFilters[key] + "\n";
             }
 
-            toString += "Non Query Filters:\n"; 
+            toString += "Non Query Filters:\n";
 
-            foreach(String key in this.nonQueryFilters.Keys) {
+            foreach (var key in this.nonQueryFilters.Keys) {
                 toString += key + " " + this.nonQueryFilters[key] + "\n";
             }
 
             return toString;
         }
 
-        private static Boolean verifyRadius(String radiusToVerify) {
+        private static bool verifyRadius(string radiusToVerify) {
+            var validRadiusRegex = new Regex(@"^([0-9]){1,}$");
 
-            Regex validRadiusRegex = new Regex(@"^([0-9]){1,}$");
-
-            Boolean isValid = validRadiusRegex.IsMatch(radiusToVerify);
-
-            return isValid;
-        }
-
-        private static Boolean verifyPrice(String priceToVerify) {
-
-            Regex validPriceRegex = new Regex(@"^((1|2|3|4)(,(1|2|3|4)){0,3})$");
-
-            Boolean isValid = validPriceRegex.IsMatch(priceToVerify);
+            var isValid = validRadiusRegex.IsMatch(radiusToVerify);
 
             return isValid;
         }
 
-        private static Boolean verifyBoolean(String booleanToVerify) {
+        private static bool verifyPrice(string priceToVerify) {
+            var validPriceRegex = new Regex(@"^((1|2|3|4)(,(1|2|3|4)){0,3})$");
 
-            Regex validBooleanRegex = new Regex(@"^(true)$");
-
-            Boolean isValid = validBooleanRegex.IsMatch(booleanToVerify);
-
-            return isValid;
-        }
-
-        private static Boolean verifyReviewScore(String reviewScoreToVerify) {
-
-            Regex validBooleanRegex = new Regex(@"^(([1-5])|([1-4].[0-9])|([5].0))$");
-
-            Boolean isValid = validBooleanRegex.IsMatch(reviewScoreToVerify);
+            var isValid = validPriceRegex.IsMatch(priceToVerify);
 
             return isValid;
         }
 
-        private void removeCommaSeperatedValues(String key, String valueToRemove) {
+        private static bool verifyBoolean(string booleanToVerify) {
+            var validBooleanRegex = new Regex(@"^(true)$");
 
+            var isValid = validBooleanRegex.IsMatch(booleanToVerify);
+
+            return isValid;
+        }
+
+        private static bool verifyReviewScore(string reviewScoreToVerify) {
+            var validBooleanRegex = new Regex(@"^(([1-5])|([1-4].[0-9])|([5].0))$");
+
+            var isValid = validBooleanRegex.IsMatch(reviewScoreToVerify);
+
+            return isValid;
+        }
+
+        private void removeCommaSeparatedValues(string key, string valueToRemove) {
             if (this.queryFilters.ContainsKey(key)) {
-                List<String> split_value = this.queryFilters[key].Split(',').ToList();
-                split_value.Remove(valueToRemove);
+                var splitValue = this.queryFilters[key].Split(',').ToList();
+                splitValue.Remove(valueToRemove);
 
-                if (split_value.Count() == 0) {
+                if (splitValue.Any()) {
                     this.queryFilters.Remove(key);
                 }
                 else {
-                    this.queryFilters[key] = String.Join(",", split_value);
+                    this.queryFilters[key] = string.Join(",", splitValue);
                 }
             }
         }
+
+        #endregion
     }
 }

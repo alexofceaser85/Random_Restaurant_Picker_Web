@@ -1,9 +1,5 @@
-﻿using Microsoft.Ajax.Utilities;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 /**
  * The class that manages the restaurants retreived from the API
@@ -14,24 +10,32 @@ using System.Web;
 
 namespace Random_Restaurant_Picker.Models {
     public class RestaurantManager {
+        #region Data members
 
         private static readonly int MINIMUM_INDEX = 0;
 
-        private List<Restaurant> theRestaurants;
+        private readonly List<Restaurant> theRestaurants;
         private Restaurant theRandomRestaurant;
-        private Random random;
+        private readonly Random random;
+
+        #endregion
+
+        #region Constructors
 
         /**
          * The constructor for the restaurant manager
          * 
          * @precondition noneC:\Users\alexd\source\repos\Random_Restaurant_Picker\Random_Restaurant_Picker\Models\RestaurantManager.cs
          * @postcondition none
-         **/
-
+         */
         public RestaurantManager() {
             this.theRestaurants = new List<Restaurant>();
             this.random = new Random();
         }
+
+        #endregion
+
+        #region Methods
 
         /**
          * Gets the random restaurant
@@ -40,8 +44,7 @@ namespace Random_Restaurant_Picker.Models {
          * @postcondition none
          * 
          * @return the random restaurant or null if the random restaurant is not assigned
-         **/
-
+         */
         public Restaurant getRandomRestaurant() {
             return this.theRandomRestaurant;
         }
@@ -53,12 +56,10 @@ namespace Random_Restaurant_Picker.Models {
          * @postcondition none
          * 
          * @param theRestaurantToAdd the restaurant to add to the restaurant manager
-         **/
-
+         */
         public void addRestaurant(Restaurant restaurantToAdd) {
-
-            if(restaurantToAdd == null) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_TO_REMOVE_CANNOT_BE_NULL);
+            if (restaurantToAdd == null) {
+                throw new ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_TO_REMOVE_CANNOT_BE_NULL);
             }
 
             this.theRestaurants.Add(restaurantToAdd);
@@ -71,12 +72,10 @@ namespace Random_Restaurant_Picker.Models {
          * @postcondition none
          * 
          * @param theRestaurantToRemove the restaurant to remove from the restaurant manager
-         **/
-
+         */
         public void removeRestaurant(Restaurant theRestaurantToRemove) {
-
-            if(theRestaurantToRemove == null) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_TO_REMOVE_CANNOT_BE_NULL);
+            if (theRestaurantToRemove == null) {
+                throw new ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_TO_REMOVE_CANNOT_BE_NULL);
             }
 
             this.theRestaurants.Remove(theRestaurantToRemove);
@@ -89,13 +88,11 @@ namespace Random_Restaurant_Picker.Models {
          * @postcondition none
          * 
          * @return size the size of the restaurants
-         **/
-
+         */
         public int getNumberOfRestaurants() {
+            var size = 0;
 
-            int size = 0;
-
-            foreach(Restaurant restaurant in this.theRestaurants) {
+            foreach (var restaurant in this.theRestaurants) {
                 size++;
             }
 
@@ -106,9 +103,9 @@ namespace Random_Restaurant_Picker.Models {
          * Returns a random restaurant
          * 
          * @precondition 
-         *      maximumRandomIndex > 0
-         *      minimumRandomIndex > 0
-         *      maximumRandomIndex > minimumRandomIndex
+         * maximumRandomIndex > 0
+         * minimumRandomIndex > 0
+         * maximumRandomIndex > minimumRandomIndex
          * 
          * @postcondition none
          * 
@@ -116,25 +113,29 @@ namespace Random_Restaurant_Picker.Models {
          * @param maximumRandomIndex the maximum index to find a random restaurant
          * 
          * @return theRandomRestaurant the random restaurant
-         **/
-
+         */
         public Restaurant pickRandomRestaurant(int minimumRandomIndex, int maximumRandomIndex) {
-
             if (minimumRandomIndex < MINIMUM_INDEX) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.MINIMUM_RESTAURANT_INDEX_CANNOT_BE_LESS_THAN_ZERO);
+                throw new ArgumentException(ErrorMessages.ErrorMessages
+                                                         .MINIMUM_RESTAURANT_INDEX_CANNOT_BE_LESS_THAN_ZERO);
             }
+
             if (maximumRandomIndex < MINIMUM_INDEX) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.MAXIMUM_RESTAURANT_INDEX_CANNOT_BE_LESS_THAN_ZERO);
+                throw new ArgumentException(ErrorMessages.ErrorMessages
+                                                         .MAXIMUM_RESTAURANT_INDEX_CANNOT_BE_LESS_THAN_ZERO);
             }
+
             if (maximumRandomIndex < minimumRandomIndex) {
-                throw new System.ArgumentException(ErrorMessages.ErrorMessages.MINIMUM_RESTAURANT_INDEX_CANNOT_BE_MORE_THAN_MAXIMUM_RESTAURANT_INDEX);
+                throw new ArgumentException(ErrorMessages.ErrorMessages
+                                                         .MINIMUM_RESTAURANT_INDEX_CANNOT_BE_MORE_THAN_MAXIMUM_RESTAURANT_INDEX);
             }
+
             if (this.getNumberOfRestaurants() == 0) {
                 return null;
             }
 
-            int randomIndex = this.random.Next(minimumRandomIndex, maximumRandomIndex);
-            Restaurant theRandomRestaurant = this.theRestaurants[randomIndex];
+            var randomIndex = this.random.Next(minimumRandomIndex, maximumRandomIndex);
+            var theRandomRestaurant = this.theRestaurants[randomIndex];
             this.theRandomRestaurant = theRandomRestaurant;
             return theRandomRestaurant;
         }
@@ -146,18 +147,17 @@ namespace Random_Restaurant_Picker.Models {
          * @postcondition none
          * 
          * @return managerString the restring representation of the restaurant manager
-         **/
+         */
+        public string toString() {
+            var managerString = "";
 
-
-        public String toString() {
-
-            String managerString = "";
-
-            foreach(Restaurant theRestaurant in this.theRestaurants) {
-                managerString += theRestaurant.ToString() + "\n";
+            foreach (var theRestaurant in this.theRestaurants) {
+                managerString += theRestaurant + "\n";
             }
 
             return managerString;
         }
+
+        #endregion
     }
 }

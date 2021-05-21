@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Random_Restaurant_Picker.Models;
 
-namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
+namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters.AddDictionaryItem {
     [TestClass]
     public class TestAddReviewScore {
 
@@ -11,7 +11,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addReviewScore(null));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddReviewScore(null));
         }
 
         [TestMethod]
@@ -19,7 +19,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addReviewScore(""));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddReviewScore(""));
         }
 
         [TestMethod]
@@ -27,7 +27,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addReviewScore("Score of 4"));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddReviewScore("Score of 4"));
         }
 
         [TestMethod]
@@ -35,7 +35,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addReviewScore("4%"));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddReviewScore("4%"));
         }
 
         [TestMethod]
@@ -43,7 +43,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addReviewScore("-50"));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddReviewScore("-50"));
         }
 
         [TestMethod]
@@ -51,7 +51,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addReviewScore("0"));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddReviewScore("0"));
         }
 
         [TestMethod]
@@ -59,7 +59,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addReviewScore("0.9"));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddReviewScore("0.9"));
         }
 
         [TestMethod]
@@ -67,7 +67,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addReviewScore("5.1"));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddReviewScore("5.1"));
         }
 
         [TestMethod]
@@ -75,7 +75,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addReviewScore("6"));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddReviewScore("6"));
         }
 
         [TestMethod]
@@ -83,7 +83,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addReviewScore("50"));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddReviewScore("50"));
         }
 
         [TestMethod]
@@ -91,12 +91,12 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addReviewScore("1");
+            theFilters.AddReviewScore("1");
 
             Assert.AreEqual("Query Filters:\n"
             + "Non Query Filters:\n"
             + "review_score 1\n"
-            , theFilters.toString());
+            , theFilters.ToString());
         }
 
         [TestMethod]
@@ -104,12 +104,12 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addReviewScore("1.0");
+            theFilters.AddReviewScore("1.0");
 
             Assert.AreEqual("Query Filters:\n"
             + "Non Query Filters:\n"
             + "review_score 1.0\n"
-            , theFilters.toString());
+            , theFilters.ToString());
         }
 
         [TestMethod]
@@ -117,12 +117,12 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addReviewScore("1.1");
+            theFilters.AddReviewScore("1.1");
 
             Assert.AreEqual("Query Filters:\n"
             + "Non Query Filters:\n"
             + "review_score 1.1\n"
-            , theFilters.toString());
+            , theFilters.ToString());
         }
 
         [TestMethod]
@@ -130,12 +130,12 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addReviewScore("2");
+            theFilters.AddReviewScore("2");
 
             Assert.AreEqual("Query Filters:\n"
             + "Non Query Filters:\n"
             + "review_score 2\n"
-            , theFilters.toString());
+            , theFilters.ToString());
         }
 
         [TestMethod]
@@ -143,12 +143,12 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addReviewScore("4.9");
+            theFilters.AddReviewScore("4.9");
 
             Assert.AreEqual("Query Filters:\n"
             + "Non Query Filters:\n"
             + "review_score 4.9\n"
-            , theFilters.toString());
+            , theFilters.ToString());
         }
 
         [TestMethod]
@@ -156,12 +156,12 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addReviewScore("4");
+            theFilters.AddReviewScore("4");
 
             Assert.AreEqual("Query Filters:\n"
             + "Non Query Filters:\n"
             + "review_score 4\n"
-            , theFilters.toString());
+            , theFilters.ToString());
         }
 
         [TestMethod]
@@ -169,12 +169,12 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addReviewScore("5");
+            theFilters.AddReviewScore("5");
 
             Assert.AreEqual("Query Filters:\n"
             + "Non Query Filters:\n"
             + "review_score 5\n"
-            , theFilters.toString());
+            , theFilters.ToString());
         }
 
         [TestMethod]
@@ -182,12 +182,12 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addReviewScore("5.0");
+            theFilters.AddReviewScore("5.0");
 
             Assert.AreEqual("Query Filters:\n"
             + "Non Query Filters:\n"
             + "review_score 5.0\n"
-            , theFilters.toString());
+            , theFilters.ToString());
         }
     }
 }

@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Random_Restaurant_Picker.Models;
 
-namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
+namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters.AddDictionaryItem {
     [TestClass]
     public class TestAddPrice {
 
@@ -11,7 +11,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addPrice(null));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddPrice(null));
         }
 
         [TestMethod]
@@ -19,7 +19,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addPrice(""));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddPrice(""));
         }
 
         [TestMethod]
@@ -27,7 +27,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addPrice("$"));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddPrice("$"));
         }
 
         [TestMethod]
@@ -35,7 +35,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addPrice("One Price Score"));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddPrice("One Price Score"));
         }
 
         [TestMethod]
@@ -43,7 +43,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addPrice("1 2 3"));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddPrice("1 2 3"));
         }
 
         [TestMethod]
@@ -51,7 +51,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addPrice("50"));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddPrice("50"));
         }
 
         [TestMethod]
@@ -59,7 +59,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addPrice("5"));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddPrice("5"));
         }
 
         [TestMethod]
@@ -67,7 +67,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addPrice("0"));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddPrice("0"));
         }
 
         [TestMethod]
@@ -75,7 +75,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addPrice("-50"));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddPrice("-50"));
         }
 
         [TestMethod]
@@ -83,12 +83,12 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addPrice("1");
+            theFilters.AddPrice("1");
 
             Assert.AreEqual("Query Filters:\n"
             + "price 1\n"
             + "Non Query Filters:\n"
-            , theFilters.toString());
+            , theFilters.ToString());
         }
 
         [TestMethod]
@@ -96,12 +96,12 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addPrice("1");
+            theFilters.AddPrice("1");
 
             Assert.AreEqual("Query Filters:\n"
             + "price 1\n"
             + "Non Query Filters:\n"
-            , theFilters.toString());
+            , theFilters.ToString());
         }
 
         [TestMethod]
@@ -109,12 +109,12 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addPrice("2");
+            theFilters.AddPrice("2");
 
             Assert.AreEqual("Query Filters:\n"
             + "price 2\n"
             + "Non Query Filters:\n"
-            , theFilters.toString());
+            , theFilters.ToString());
         }
 
         [TestMethod]
@@ -122,12 +122,12 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addPrice("4");
+            theFilters.AddPrice("4");
 
             Assert.AreEqual("Query Filters:\n"
             + "price 4\n"
             + "Non Query Filters:\n"
-            , theFilters.toString());
+            , theFilters.ToString());
         }
 
         [TestMethod]
@@ -135,12 +135,12 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addPrice("3");
+            theFilters.AddPrice("3");
 
             Assert.AreEqual("Query Filters:\n"
             + "price 3\n"
             + "Non Query Filters:\n"
-            , theFilters.toString());
+            , theFilters.ToString());
         }
 
         [TestMethod]
@@ -148,13 +148,13 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addPrice("1");
-            theFilters.addPrice("1");
+            theFilters.AddPrice("1");
+            theFilters.AddPrice("1");
 
             Assert.AreEqual("Query Filters:\n"
             + "price 1\n"
             + "Non Query Filters:\n"
-            , theFilters.toString());
+            , theFilters.ToString());
         }
 
         [TestMethod]
@@ -162,13 +162,13 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addPrice("1");
-            theFilters.addPrice("2");
+            theFilters.AddPrice("1");
+            theFilters.AddPrice("2");
 
             Assert.AreEqual("Query Filters:\n"
             + "price 1,2\n"
             + "Non Query Filters:\n"
-            , theFilters.toString());
+            , theFilters.ToString());
         }
 
         [TestMethod]
@@ -176,12 +176,12 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addPrice("1,2,3");
+            theFilters.AddPrice("1,2,3");
 
             Assert.AreEqual("Query Filters:\n"
             + "price 1,2,3\n"
             + "Non Query Filters:\n"
-            , theFilters.toString());
+            , theFilters.ToString());
         }
 
         [TestMethod]
@@ -189,14 +189,14 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
         public void shouldSortPrices() {
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addPrice("3");
-            theFilters.addPrice("2");
-            theFilters.addPrice("1");
+            theFilters.AddPrice("3");
+            theFilters.AddPrice("2");
+            theFilters.AddPrice("1");
 
             Assert.AreEqual("Query Filters:\n"
             + "price 1,2,3\n"
             + "Non Query Filters:\n"
-            , theFilters.toString());
+            , theFilters.ToString());
         }
     }
 }

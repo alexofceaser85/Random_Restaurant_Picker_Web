@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Random_Restaurant_Picker.Models;
 
-namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
+namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters.AddDictionaryItem {
     [TestClass]
     public class TestAddAttributes {
 
@@ -11,7 +11,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addAttribute(null));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddAttribute(null));
         }
 
         [TestMethod]
@@ -19,7 +19,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addAttribute(""));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddAttribute(""));
         }
 
         [TestMethod]
@@ -27,12 +27,12 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addAttribute("wheelchair_accessible");
+            theFilters.AddAttribute("wheelchair_accessible");
 
             Assert.AreEqual("Query Filters:\n"
             + "attributes wheelchair_accessible\n"
             + "Non Query Filters:\n"
-            , theFilters.toString());
+            , theFilters.ToString());
         }
 
         [TestMethod]
@@ -40,14 +40,14 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addAttribute("wheelchair_accessible");
-            theFilters.addAttribute("hot_and_new");
-            theFilters.addAttribute("reservation");
+            theFilters.AddAttribute("wheelchair_accessible");
+            theFilters.AddAttribute("hot_and_new");
+            theFilters.AddAttribute("reservation");
 
             Assert.AreEqual("Query Filters:\n"
             + "attributes wheelchair_accessible,hot_and_new,reservation\n"
             + "Non Query Filters:\n"
-            , theFilters.toString());
+            , theFilters.ToString());
         }
 
         [TestMethod]
@@ -55,13 +55,13 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addAttribute("wheelchair_accessible");
-            theFilters.addAttribute("wheelchair_accessible");
+            theFilters.AddAttribute("wheelchair_accessible");
+            theFilters.AddAttribute("wheelchair_accessible");
 
             Assert.AreEqual("Query Filters:\n"
             + "attributes wheelchair_accessible\n"
             + "Non Query Filters:\n"
-            , theFilters.toString());
+            , theFilters.ToString());
         }
     }
 }

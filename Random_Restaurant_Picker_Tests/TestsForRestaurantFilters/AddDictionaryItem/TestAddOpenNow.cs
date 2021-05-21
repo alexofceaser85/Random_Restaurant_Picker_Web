@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Random_Restaurant_Picker.Models;
 
-namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
+namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters.AddDictionaryItem {
     [TestClass]
     public class TestAddOpenNow {
 
@@ -11,7 +11,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addOpenNow(null));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddOpenNow(null));
         }
 
         [TestMethod]
@@ -19,7 +19,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addOpenNow(""));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddOpenNow(""));
         }
 
         [TestMethod]
@@ -27,7 +27,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addOpenNow("15"));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddOpenNow("15"));
         }
 
         [TestMethod]
@@ -35,7 +35,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addOpenNow("Invalid Letters"));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddOpenNow("Invalid Letters"));
         }
 
         [TestMethod]
@@ -43,12 +43,12 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addOpenNow("true");
+            theFilters.AddOpenNow("true");
 
             Assert.AreEqual("Query Filters:\n"
             + "open_now true\n"
             + "Non Query Filters:\n"
-            , theFilters.toString());
+            , theFilters.ToString());
         }
     }
 }

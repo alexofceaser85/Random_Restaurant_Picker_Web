@@ -11,7 +11,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters.OtherTests {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Dictionary<String, String> filtersDictionary = theFilters.getQueryFilters();
+            Dictionary<String, String> filtersDictionary = theFilters.GetQueryFilters();
 
             filtersDictionary.Add("Added", "Successfully");
             String verifyString = "";

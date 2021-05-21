@@ -11,7 +11,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters.RemoveDiction
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.removeAttribute(null));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.RemoveAttribute(null));
         }
 
         [TestMethod]
@@ -19,7 +19,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters.RemoveDiction
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.removeAttribute(""));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.RemoveAttribute(""));
         }
 
         [TestMethod]
@@ -27,10 +27,10 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters.RemoveDiction
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.removeAttribute("hot_and_new");
+            theFilters.RemoveAttribute("hot_and_new");
 
             Assert.AreEqual("Query Filters:\n"
-                + "Non Query Filters:\n", theFilters.toString());
+                + "Non Query Filters:\n", theFilters.ToString());
         }
 
         [TestMethod]
@@ -38,11 +38,11 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters.RemoveDiction
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addAttribute("hot_and_new");
-            theFilters.removeAttribute("hot_and_new");
+            theFilters.AddAttribute("hot_and_new");
+            theFilters.RemoveAttribute("hot_and_new");
 
             Assert.AreEqual("Query Filters:\n"
-                + "Non Query Filters:\n", theFilters.toString());
+                + "Non Query Filters:\n", theFilters.ToString());
         }
 
         [TestMethod]
@@ -50,12 +50,12 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters.RemoveDiction
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addAttribute("hot_and_new");
-            theFilters.removeAttribute("reservation");
+            theFilters.AddAttribute("hot_and_new");
+            theFilters.RemoveAttribute("reservation");
 
             Assert.AreEqual("Query Filters:\n"
                 + "attributes hot_and_new\n"
-                + "Non Query Filters:\n", theFilters.toString());
+                + "Non Query Filters:\n", theFilters.ToString());
         }
 
         [TestMethod]
@@ -63,14 +63,14 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters.RemoveDiction
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addAttribute("wheelchair_accessible");
-            theFilters.addAttribute("hot_and_new");
-            theFilters.addAttribute("reservation");
-            theFilters.removeAttribute("waitlist_reservation");
+            theFilters.AddAttribute("wheelchair_accessible");
+            theFilters.AddAttribute("hot_and_new");
+            theFilters.AddAttribute("reservation");
+            theFilters.RemoveAttribute("waitlist_reservation");
 
             Assert.AreEqual("Query Filters:\n"
                 + "attributes wheelchair_accessible,hot_and_new,reservation\n"
-                + "Non Query Filters:\n", theFilters.toString());
+                + "Non Query Filters:\n", theFilters.ToString());
         }
 
         [TestMethod]
@@ -78,14 +78,14 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters.RemoveDiction
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addAttribute("wheelchair_accessible");
-            theFilters.addAttribute("hot_and_new");
-            theFilters.addAttribute("reservation");
-            theFilters.removeAttribute("wheelchair_accessible");
+            theFilters.AddAttribute("wheelchair_accessible");
+            theFilters.AddAttribute("hot_and_new");
+            theFilters.AddAttribute("reservation");
+            theFilters.RemoveAttribute("wheelchair_accessible");
 
             Assert.AreEqual("Query Filters:\n"
                 + "attributes hot_and_new,reservation\n"
-                + "Non Query Filters:\n", theFilters.toString());
+                + "Non Query Filters:\n", theFilters.ToString());
         }
 
         [TestMethod]
@@ -93,14 +93,14 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters.RemoveDiction
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addAttribute("wheelchair_accessible");
-            theFilters.addAttribute("hot_and_new");
-            theFilters.addAttribute("reservation");
-            theFilters.removeAttribute("hot_and_new");
+            theFilters.AddAttribute("wheelchair_accessible");
+            theFilters.AddAttribute("hot_and_new");
+            theFilters.AddAttribute("reservation");
+            theFilters.RemoveAttribute("hot_and_new");
 
             Assert.AreEqual("Query Filters:\n"
                 + "attributes wheelchair_accessible,reservation\n"
-                + "Non Query Filters:\n", theFilters.toString());
+                + "Non Query Filters:\n", theFilters.ToString());
         }
 
         [TestMethod]
@@ -108,14 +108,14 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters.RemoveDiction
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addAttribute("wheelchair_accessible");
-            theFilters.addAttribute("hot_and_new");
-            theFilters.addAttribute("reservation");
-            theFilters.removeAttribute("reservation");
+            theFilters.AddAttribute("wheelchair_accessible");
+            theFilters.AddAttribute("hot_and_new");
+            theFilters.AddAttribute("reservation");
+            theFilters.RemoveAttribute("reservation");
 
             Assert.AreEqual("Query Filters:\n"
                 + "attributes wheelchair_accessible,hot_and_new\n"
-                + "Non Query Filters:\n", theFilters.toString());
+                + "Non Query Filters:\n", theFilters.ToString());
         }
 
         [TestMethod]
@@ -123,16 +123,16 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters.RemoveDiction
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addAttribute("hot_and_new");
-            theFilters.addLocation("32515");
-            theFilters.addOpenNow("true");
+            theFilters.AddAttribute("hot_and_new");
+            theFilters.AddLocation("32515");
+            theFilters.AddOpenNow("true");
 
-            theFilters.removeAttribute("hot_and_new");
+            theFilters.RemoveAttribute("hot_and_new");
 
             Assert.AreEqual("Query Filters:\n"
             + "location 32515\n"
             + "open_now true\n"
-            + "Non Query Filters:\n", theFilters.toString());
+            + "Non Query Filters:\n", theFilters.ToString());
         }
 
         [TestMethod]
@@ -140,16 +140,16 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters.RemoveDiction
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addAttribute("hot_and_new");
-            theFilters.addLocation("32515");
-            theFilters.addOpenNow("true");
+            theFilters.AddAttribute("hot_and_new");
+            theFilters.AddLocation("32515");
+            theFilters.AddOpenNow("true");
 
-            theFilters.removeAttribute("hot_and_new");
+            theFilters.RemoveAttribute("hot_and_new");
 
             Assert.AreEqual("Query Filters:\n"
             + "location 32515\n"
             + "open_now true\n"
-            + "Non Query Filters:\n", theFilters.toString());
+            + "Non Query Filters:\n", theFilters.ToString());
         }
 
         [TestMethod]
@@ -157,16 +157,16 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters.RemoveDiction
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addAttribute("hot_and_new");
-            theFilters.addLocation("32515");
-            theFilters.addOpenNow("true");
+            theFilters.AddAttribute("hot_and_new");
+            theFilters.AddLocation("32515");
+            theFilters.AddOpenNow("true");
 
-            theFilters.removeAttribute("hot_and_new");
+            theFilters.RemoveAttribute("hot_and_new");
 
             Assert.AreEqual("Query Filters:\n"
             + "location 32515\n"
             + "open_now true\n"
-            + "Non Query Filters:\n", theFilters.toString());
+            + "Non Query Filters:\n", theFilters.ToString());
         }
 
     }

@@ -1,8 +1,7 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Random_Restaurant_Picker.Models;
 
-namespace Random_Restaurant_Picker_Tests {
+namespace Random_Restaurant_Picker_Tests.TestsForRestaurantManager {
     [TestClass]
     public class TestGetNumberOfRestaurants {
         [TestMethod]

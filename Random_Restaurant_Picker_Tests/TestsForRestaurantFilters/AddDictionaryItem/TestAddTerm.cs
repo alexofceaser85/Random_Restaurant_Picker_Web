@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Random_Restaurant_Picker.Models;
 
-namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
+namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters.AddDictionaryItem {
     [TestClass]
     public class TestAddTerm {
         [TestMethod]
@@ -10,7 +10,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addTerm(null));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddTerm(null));
         }
 
         [TestMethod]
@@ -18,7 +18,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addTerm(""));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddTerm(""));
         }
 
         [TestMethod]
@@ -26,9 +26,9 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addTerm("burgers");
+            theFilters.AddTerm("burgers");
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addTerm("chinese"));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddTerm("chinese"));
         }
 
         [TestMethod]
@@ -36,12 +36,12 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addTerm("burgers");
+            theFilters.AddTerm("burgers");
 
             Assert.AreEqual("Query Filters:\n"
             + "term burgers\n"
             + "Non Query Filters:\n"
-            , theFilters.toString());
+            , theFilters.ToString());
         }
     }
 }

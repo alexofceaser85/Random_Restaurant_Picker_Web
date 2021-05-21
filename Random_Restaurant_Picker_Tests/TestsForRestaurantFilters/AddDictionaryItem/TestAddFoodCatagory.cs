@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Random_Restaurant_Picker.Models;
 
-namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
+namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters.AddDictionaryItem {
     [TestClass]
     public class TestAddFoodCatagory {
         [TestMethod]
@@ -10,7 +10,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addFoodCatagory(null));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddFoodCategory(null));
         }
 
         [TestMethod]
@@ -18,7 +18,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addFoodCatagory(""));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddFoodCategory(""));
         }
 
         [TestMethod]
@@ -26,9 +26,9 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addFoodCatagory("Burgers");
+            theFilters.AddFoodCategory("Burgers");
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addFoodCatagory("Fried Chicken"));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddFoodCategory("Fried Chicken"));
         }
 
         [TestMethod]
@@ -36,12 +36,12 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addFoodCatagory("Burgers");
+            theFilters.AddFoodCategory("Burgers");
 
             Assert.AreEqual("Query Filters:\n"
             + "categories Burgers\n"
             + "Non Query Filters:\n"
-            , theFilters.toString());
+            , theFilters.ToString());
         }
     }
 }

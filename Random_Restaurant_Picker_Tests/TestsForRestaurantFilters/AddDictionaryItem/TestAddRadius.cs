@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Random_Restaurant_Picker.Models;
 
-namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
+namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters.AddDictionaryItem {
     [TestClass]
     public class TestAddRadius {
         [TestMethod]
@@ -10,7 +10,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addRadius(null));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddRadius(null));
         }
 
         [TestMethod]
@@ -18,7 +18,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addRadius(""));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddRadius(""));
         }
 
         [TestMethod]
@@ -26,7 +26,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addRadius("10 Miles"));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddRadius("10 Miles"));
 
         }
 
@@ -35,7 +35,7 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addRadius("10%"));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddRadius("10%"));
 
         }
 
@@ -44,9 +44,9 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addRadius("25");
+            theFilters.AddRadius("25");
 
-            Assert.ThrowsException<ArgumentException>(() => theFilters.addRadius("5"));
+            Assert.ThrowsException<ArgumentException>(() => theFilters.AddRadius("5"));
         }
 
         [TestMethod]
@@ -54,12 +54,12 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addRadius("0");
+            theFilters.AddRadius("0");
 
             Assert.AreEqual("Query Filters:\n"
             + "radius 0\n"
             + "Non Query Filters:\n"
-            , theFilters.toString());
+            , theFilters.ToString());
         }
 
         [TestMethod]
@@ -67,12 +67,12 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addRadius("25");
+            theFilters.AddRadius("25");
 
             Assert.AreEqual("Query Filters:\n"
             + "radius 25\n"
             + "Non Query Filters:\n"
-            , theFilters.toString());
+            , theFilters.ToString());
         }
 
         [TestMethod]
@@ -80,12 +80,12 @@ namespace Random_Restaurant_Picker_Tests.TestsForRestaurantFilters {
 
             RestaurantFilters theFilters = new RestaurantFilters();
 
-            theFilters.addRadius("25000");
+            theFilters.AddRadius("25000");
 
             Assert.AreEqual("Query Filters:\n"
             + "radius 25000\n"
             + "Non Query Filters:\n"
-            , theFilters.toString());
+            , theFilters.ToString());
         }
     }
 }
