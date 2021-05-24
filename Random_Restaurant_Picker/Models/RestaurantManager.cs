@@ -1,18 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 
-/**
- * The class that manages the restaurants retreived from the API
- * 
- * @author Alex DeCesare
- * @version 23-December-2020
- **/
-
 namespace Random_Restaurant_Picker.Models {
+
+    /// <summary>
+    /// The class that manages the restaurants retrieved from the API
+    /// </summary>
+    ///
+    /// <author>
+    /// Alex DeCesare
+    /// </author>
+    /// <version>
+    /// 23-December-2020
+    /// </version>
     public class RestaurantManager {
         #region Data members
 
-        private static readonly int MINIMUM_INDEX = 0;
+        private const int MINIMUM_INDEX = 0;
 
         private readonly List<Restaurant> theRestaurants;
         private Restaurant theRandomRestaurant;
@@ -22,12 +26,17 @@ namespace Random_Restaurant_Picker.Models {
 
         #region Constructors
 
-        /**
-         * The constructor for the restaurant manager
-         * 
-         * @precondition noneC:\Users\alexd\source\repos\Random_Restaurant_Picker\Random_Restaurant_Picker\Models\RestaurantManager.cs
-         * @postcondition none
-         */
+        /// <summary>
+        /// The constructor of the <see cref="RestaurantManager"/> class.
+        /// </summary>
+        ///
+        /// <precondition>
+        /// none
+        /// </precondition>
+        ///
+        /// <postcondition>
+        /// none
+        /// </postcondition>
         public RestaurantManager() {
             this.theRestaurants = new List<Restaurant>();
             this.random = new Random();
@@ -37,43 +46,59 @@ namespace Random_Restaurant_Picker.Models {
 
         #region Methods
 
-        /**
-         * Gets the random restaurant
-         * 
-         * @precondition none
-         * @postcondition none
-         * 
-         * @return the random restaurant or null if the random restaurant is not assigned
-         */
-        public Restaurant getRandomRestaurant() {
+        /// <summary>
+        /// Gets the random restaurant.
+        /// </summary>
+        ///
+        /// <precondition>
+        /// none
+        /// </precondition>
+        ///
+        /// <postcondition>
+        /// none
+        /// </postcondition>
+        /// <returns>The random restaurant</returns>
+        public Restaurant GetRandomRestaurant() {
             return this.theRandomRestaurant;
         }
 
-        /**
-         * Adds a restaurant to the restaurant manager
-         * 
-         * @precondition theRestaurantToAdd != null
-         * @postcondition none
-         * 
-         * @param theRestaurantToAdd the restaurant to add to the restaurant manager
-         */
-        public void addRestaurant(Restaurant restaurantToAdd) {
+        /// <summary>
+        /// Adds a restaurant to the restaurant manager
+        /// </summary>
+        ///
+        /// <precondition>
+        /// theRestaurantToAdd != null
+        /// </precondition>
+        ///
+        /// <postcondition>
+        /// this.theRandomRestaurant.Size() == this.theRandomRestaurant.Size() + 1
+        /// </postcondition>
+        /// 
+        /// <param name="restaurantToAdd">The restaurant to add.</param>
+        /// <exception cref="ArgumentException"></exception>
+        public void AddRestaurant(Restaurant restaurantToAdd) {
             if (restaurantToAdd == null) {
-                throw new ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_TO_REMOVE_CANNOT_BE_NULL);
+                throw new ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_TO_ADD_CANNOT_BE_NULL);
             }
 
             this.theRestaurants.Add(restaurantToAdd);
         }
 
-        /**
-         * Removes a restaurant from the restaurant manager
-         * 
-         * @precondition theRestaurantToRemove != null
-         * @postcondition none
-         * 
-         * @param theRestaurantToRemove the restaurant to remove from the restaurant manager
-         */
-        public void removeRestaurant(Restaurant theRestaurantToRemove) {
+        /// <summary>
+        /// Removes a restaurant from the restaurant manager
+        /// </summary>
+        ///
+        /// <precondition>
+        /// theRestaurantToAdd != null
+        /// </precondition>
+        ///
+        /// <postcondition>
+        /// this.theRandomRestaurant.Size() == this.theRandomRestaurant.Size() - 1
+        /// </postcondition>
+        /// 
+        /// <param name="theRestaurantToRemove">The restaurant to remove.</param>
+        /// <exception cref="ArgumentException"></exception>
+        public void RemoveRestaurant(Restaurant theRestaurantToRemove) {
             if (theRestaurantToRemove == null) {
                 throw new ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_TO_REMOVE_CANNOT_BE_NULL);
             }
@@ -81,74 +106,83 @@ namespace Random_Restaurant_Picker.Models {
             this.theRestaurants.Remove(theRestaurantToRemove);
         }
 
-        /**
-         * Get the size of the restaurants
-         * 
-         * @precondition none
-         * @postcondition none
-         * 
-         * @return size the size of the restaurants
-         */
-        public int getNumberOfRestaurants() {
-            var size = 0;
-
-            foreach (var restaurant in this.theRestaurants) {
-                size++;
-            }
-
-            return size;
+        /// <summary>
+        /// Gets the number of restaurants in the manager.
+        /// </summary>
+        ///
+        /// <precondition>
+        /// none
+        /// </precondition>
+        ///
+        /// <postcondition>
+        /// none
+        /// </postcondition>
+        /// <returns>The number of restaurants in the manager</returns>
+        public int GetNumberOfRestaurants() {
+            return this.theRestaurants.Count;
         }
 
-        /**
-         * Returns a random restaurant
-         * 
-         * @precondition 
-         * maximumRandomIndex > 0
-         * minimumRandomIndex > 0
-         * maximumRandomIndex > minimumRandomIndex
-         * 
-         * @postcondition none
-         * 
-         * @param minimumRandomIndex the minimum index to find a random restaurant
-         * @param maximumRandomIndex the maximum index to find a random restaurant
-         * 
-         * @return theRandomRestaurant the random restaurant
-         */
-        public Restaurant pickRandomRestaurant(int minimumRandomIndex, int maximumRandomIndex) {
+        /// <summary>
+        /// Picks and returns the random restaurant.
+        /// </summary>
+        ///
+        /// <precondition>
+        /// minimumRandomIndex MORE THAN OR EQUAL TO MINIMUM_INDEX
+        /// maximumRandomIndex MORE THAN OR EQUAL TO MINIMUM_INDEX
+        /// maximumRandomIndex MORE THAN OR EQUAL TO minimumRandomIndex
+        /// </precondition>
+        ///
+        /// <postcondition>
+        /// this.theRandomRestaurant == theRandomRestaurant
+        /// </postcondition>
+        /// 
+        /// <param name="minimumRandomIndex">Minimum value of the random index.</param>
+        /// <param name="maximumRandomIndex">Maximum value of the random index.</param>
+        ///
+        /// <returns>
+        /// Returns The randomly picked restaurant if this.GetNumberOfRestaurants != 0 (there are restaurants in the manager)
+        /// Returns zero if this.GetNumberOfRestaurants == 0 (there are no restaurants in the manager)
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        /// </exception>
+        public Restaurant PickRandomRestaurant(int minimumRandomIndex, int maximumRandomIndex) {
             if (minimumRandomIndex < MINIMUM_INDEX) {
                 throw new ArgumentException(ErrorMessages.ErrorMessages
                                                          .MINIMUM_RESTAURANT_INDEX_CANNOT_BE_LESS_THAN_ZERO);
             }
 
             if (maximumRandomIndex < MINIMUM_INDEX) {
-                throw new ArgumentException(ErrorMessages.ErrorMessages
-                                                         .MAXIMUM_RESTAURANT_INDEX_CANNOT_BE_LESS_THAN_ZERO);
+                throw new ArgumentException(ErrorMessages.ErrorMessages.MAXIMUM_RESTAURANT_INDEX_CANNOT_BE_LESS_THAN_ZERO);
             }
 
             if (maximumRandomIndex < minimumRandomIndex) {
-                throw new ArgumentException(ErrorMessages.ErrorMessages
-                                                         .MINIMUM_RESTAURANT_INDEX_CANNOT_BE_MORE_THAN_MAXIMUM_RESTAURANT_INDEX);
+                throw new ArgumentException(ErrorMessages.ErrorMessages.MINIMUM_RESTAURANT_INDEX_CANNOT_BE_MORE_THAN_MAXIMUM_RESTAURANT_INDEX);
             }
 
-            if (this.getNumberOfRestaurants() == 0) {
+            if (this.GetNumberOfRestaurants() == 0) {
                 return null;
             }
 
             var randomIndex = this.random.Next(minimumRandomIndex, maximumRandomIndex);
             var theRandomRestaurant = this.theRestaurants[randomIndex];
             this.theRandomRestaurant = theRandomRestaurant;
-            return theRandomRestaurant;
+            return this.theRandomRestaurant;
         }
 
-        /**
-         * returns a string representation of the restaurant manager
-         * 
-         * @precondition none
-         * @postcondition none
-         * 
-         * @return managerString the restring representation of the restaurant manager
-         */
-        public string toString() {
+        /// <summary>
+        /// returns a string representation of the restaurant manager
+        /// </summary>
+        ///
+        /// <precondition>
+        /// none
+        /// </precondition>
+        ///
+        /// <postcondition>
+        /// none
+        /// </postcondition>
+        /// 
+        /// <returns>managerString the string representation of the restaurant manager</returns>
+        public override string ToString() {
             var managerString = "";
 
             foreach (var theRestaurant in this.theRestaurants) {

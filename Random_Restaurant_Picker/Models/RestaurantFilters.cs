@@ -18,14 +18,14 @@ namespace Random_Restaurant_Picker.Models {
     public class RestaurantFilters {
         #region Data members
 
-        private const string TermKey = "term";
-        private const string LocationKey = "location";
-        private const string RadiusKey = "radius";
-        private const string FoodCategoriesKey = "categories";
-        private const string PriceKey = "price";
-        private const string OpenNowKey = "open_now";
-        private const string AttributesKey = "attributes";
-        private const string ReviewScoreKey = "review_score";
+        private const string TERM_KEY = "term";
+        private const string LOCATION_KEY = "location";
+        private const string RADIUS_KEY = "radius";
+        private const string FOOD_CATEGORIES_KEY = "categories";
+        private const string PRICE_KEY = "price";
+        private const string OPEN_NOW_KEY = "open_now";
+        private const string ATTRIBUTES_KEY = "attributes";
+        private const string REVIEW_SCORE_KEY = "review_score";
         private readonly Dictionary<string, string> queryFilters;
         private readonly Dictionary<string, string> nonQueryFilters;
 
@@ -92,7 +92,7 @@ namespace Random_Restaurant_Picker.Models {
                 throw new ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_EMPTY);
             }
 
-            this.queryFilters.Add(TermKey, filterToAdd);
+            this.queryFilters.Add(TERM_KEY, filterToAdd);
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace Random_Restaurant_Picker.Models {
         ///     this.queryFilters.Count EQUALS this.queryFilters.Count - 1
         /// </postcondition>
         public void RemoveTerm() {
-            this.queryFilters.Remove(TermKey);
+            this.queryFilters.Remove(TERM_KEY);
         }
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace Random_Restaurant_Picker.Models {
                 throw new ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_EMPTY);
             }
 
-            this.queryFilters.Add(LocationKey, filterToAdd);
+            this.queryFilters.Add(LOCATION_KEY, filterToAdd);
         }
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace Random_Restaurant_Picker.Models {
         ///     this.queryFilters.Count EQUALS this.queryFilters.Count - 1
         /// </postcondition>
         public void RemoveLocation() {
-            this.queryFilters.Remove(LocationKey);
+            this.queryFilters.Remove(LOCATION_KEY);
         }
 
         /// <summary>
@@ -172,7 +172,7 @@ namespace Random_Restaurant_Picker.Models {
                 throw new ArgumentException(ErrorMessages.ErrorMessages.RADIUS_TO_ADD_IS_NOT_IN_CORRECT_FORMAT);
             }
 
-            this.queryFilters.Add(RadiusKey, filterToAdd);
+            this.queryFilters.Add(RADIUS_KEY, filterToAdd);
         }
 
         /// <summary>
@@ -185,7 +185,7 @@ namespace Random_Restaurant_Picker.Models {
         ///     this.queryFilters.Count EQUALS this.queryFilters.Count - 1
         /// </postcondition>
         public void RemoveRadius() {
-            this.queryFilters.Remove(RadiusKey);
+            this.queryFilters.Remove(RADIUS_KEY);
         }
 
         /// <summary>
@@ -211,7 +211,7 @@ namespace Random_Restaurant_Picker.Models {
                 throw new ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_EMPTY);
             }
 
-            this.queryFilters.Add(FoodCategoriesKey, filterToAdd);
+            this.queryFilters.Add(FOOD_CATEGORIES_KEY, filterToAdd);
         }
 
         /// <summary>
@@ -222,7 +222,7 @@ namespace Random_Restaurant_Picker.Models {
         ///     this.queryFilters.Count EQUALS this.queryFilters.Count - 1
         /// </postcondition>
         public void RemoveFoodCategory() {
-            this.queryFilters.Remove(FoodCategoriesKey);
+            this.queryFilters.Remove(FOOD_CATEGORIES_KEY);
         }
 
         /// <summary>
@@ -253,19 +253,21 @@ namespace Random_Restaurant_Picker.Models {
                 throw new ArgumentException(ErrorMessages.ErrorMessages.PRICE_TO_ADD_IS_NOT_IN_CORRECT_FORMAT);
             }
 
-            if (this.queryFilters.ContainsKey(PriceKey)) {
-                var splitPriceFilters = this.queryFilters[PriceKey].Split(',').ToList();
-
-                if (!splitPriceFilters.Contains(filterToAdd)) {
-                    splitPriceFilters.Add(filterToAdd);
-                    var sortedPriceFilters = splitPriceFilters.OrderBy(q => q).ToList();
-
-                    this.queryFilters[PriceKey] = string.Join(",", sortedPriceFilters);
-                }
+            if (!this.queryFilters.ContainsKey(PRICE_KEY)) {
+                this.queryFilters.Add(PRICE_KEY, filterToAdd);
+                return;
             }
-            else {
-                this.queryFilters.Add(PriceKey, filterToAdd);
+
+            var splitPriceFilters = this.queryFilters[PRICE_KEY].Split(',').ToList();
+
+            if (splitPriceFilters.Contains(filterToAdd)) {
+                return;
             }
+
+            splitPriceFilters.Add(filterToAdd);
+            var sortedPriceFilters = splitPriceFilters.OrderBy(q => q).ToList();
+
+            this.queryFilters[PRICE_KEY] = string.Join(",", sortedPriceFilters);
         }
 
         /// <summary>
@@ -288,7 +290,7 @@ namespace Random_Restaurant_Picker.Models {
                 throw new ArgumentException(ErrorMessages.ErrorMessages.PRICE_TO_REMOVE_CANNOT_BE_EMPTY);
             }
 
-            this.removeCommaSeparatedValues(PriceKey, priceToRemove);
+            this.removeCommaSeparatedValues(PRICE_KEY, priceToRemove);
         }
 
         /// <summary>
@@ -318,7 +320,7 @@ namespace Random_Restaurant_Picker.Models {
                 throw new ArgumentException(ErrorMessages.ErrorMessages.OPEN_NOW_IS_NOT_IN_CORRECT_FORMAT);
             }
 
-            this.queryFilters.Add(OpenNowKey, filterToAdd);
+            this.queryFilters.Add(OPEN_NOW_KEY, filterToAdd);
         }
 
         /// <summary>
@@ -329,7 +331,7 @@ namespace Random_Restaurant_Picker.Models {
         ///     this.queryFilters.Count EQUALS this.queryFilters.Count - 1
         /// </postcondition>
         public void RemoveOpenNow() {
-            this.queryFilters.Remove(OpenNowKey);
+            this.queryFilters.Remove(OPEN_NOW_KEY);
         }
 
         /// <summary>
@@ -355,15 +357,15 @@ namespace Random_Restaurant_Picker.Models {
                 throw new ArgumentException(ErrorMessages.ErrorMessages.FILTER_TO_ADD_CANNOT_BE_EMPTY);
             }
 
-            if (this.queryFilters.ContainsKey(AttributesKey)) {
-                var splitAttributes = this.queryFilters[AttributesKey].Split(',');
+            if (this.queryFilters.ContainsKey(ATTRIBUTES_KEY)) {
+                var splitAttributes = this.queryFilters[ATTRIBUTES_KEY].Split(',');
 
                 if (!splitAttributes.Contains(filterToAdd)) {
-                    this.queryFilters[AttributesKey] += "," + filterToAdd;
+                    this.queryFilters[ATTRIBUTES_KEY] += "," + filterToAdd;
                 }
             }
             else {
-                this.queryFilters.Add(AttributesKey, filterToAdd);
+                this.queryFilters.Add(ATTRIBUTES_KEY, filterToAdd);
             }
         }
 
@@ -383,7 +385,7 @@ namespace Random_Restaurant_Picker.Models {
                 throw new ArgumentException(ErrorMessages.ErrorMessages.ATTRIBUTE_TO_REMOVE_CANNOT_BE_EMPTY);
             }
 
-            this.removeCommaSeparatedValues(AttributesKey, attributeToRemove);
+            this.removeCommaSeparatedValues(ATTRIBUTES_KEY, attributeToRemove);
         }
 
         /// <summary>
@@ -413,7 +415,7 @@ namespace Random_Restaurant_Picker.Models {
                 throw new ArgumentException(ErrorMessages.ErrorMessages.REVIEW_SCORE_IS_NOT_IN_CORRECT_FORMAT);
             }
 
-            this.nonQueryFilters.Add(ReviewScoreKey, filterToAdd);
+            this.nonQueryFilters.Add(REVIEW_SCORE_KEY, filterToAdd);
         }
 
         /// <summary>
@@ -424,7 +426,7 @@ namespace Random_Restaurant_Picker.Models {
         ///     this.queryFilters.Count EQUALS this.queryFilters.Count - 1
         /// </postcondition>
         public void RemoveReviewScore() {
-            this.nonQueryFilters.Remove(ReviewScoreKey);
+            this.nonQueryFilters.Remove(REVIEW_SCORE_KEY);
         }
 
         /// <summary>
@@ -482,16 +484,17 @@ namespace Random_Restaurant_Picker.Models {
         }
 
         private void removeCommaSeparatedValues(string key, string valueToRemove) {
-            if (this.queryFilters.ContainsKey(key)) {
-                var splitValue = this.queryFilters[key].Split(',').ToList();
-                splitValue.Remove(valueToRemove);
+            if (!this.queryFilters.ContainsKey(key)) {
+                return;
+            }
 
-                if (splitValue.Any()) {
-                    this.queryFilters.Remove(key);
-                }
-                else {
-                    this.queryFilters[key] = string.Join(",", splitValue);
-                }
+            var splitValue = this.queryFilters[key].Split(',').ToList();
+            splitValue.Remove(valueToRemove);
+
+            if (!splitValue.Any()) {
+                this.queryFilters.Remove(key);
+            } else {
+                this.queryFilters[key] = string.Join(",", splitValue);
             }
         }
 

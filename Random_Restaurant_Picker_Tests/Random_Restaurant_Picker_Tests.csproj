@@ -45,10 +45,14 @@
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\MSTest.TestFramework.2.1.0\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TestsForRestaurantsQuery\TestAssembleQueryString.cs" />
     <Compile Include="TestsForRestaurantFilters\AddDictionaryItem\TestAddAttributes.cs" />
     <Compile Include="TestsForRestaurantFilters\AddDictionaryItem\TestAddFoodCatagory.cs" />
     <Compile Include="TestsForRestaurantFilters\AddDictionaryItem\TestAddOpenNow.cs" />
@@ -72,8 +76,8 @@
     <Compile Include="TestsForRestaurantManager\TestGetRandomRestaurant.cs" />
     <Compile Include="TestsForRestaurantManager\TestPickRandomRestaurant.cs" />
     <Compile Include="TestsForRestaurantManager\TestRemoveRestaurant.cs" />
-    <Compile Include="TestsForRestaurantsQuery\ShouldNotReturnResultsForLocationFilters.cs" />
-    <Compile Include="TestsForRestaurantsQuery\ShouldReturnResultsForValidFilters.cs" />
+    <Compile Include="TestsForRestaurantsQuery\TestPopulateRestaurants.cs" />
+    <Compile Include="TestsForRestaurantsQuery\TestQueryRestaurants.cs" />
     <Compile Include="TestsForRestaurant\TestRestaurantConstructor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -87,7 +91,9 @@
       <Name>Random_Restaurant_Picker</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="TestRestaurantQueryUtils\" />
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

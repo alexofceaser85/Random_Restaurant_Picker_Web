@@ -14,20 +14,91 @@ namespace Random_Restaurant_Picker.Models {
         private const int RESTAURANT_MINIMUM_REVIEW_COUNT = 0;
         private const int RESTAURANT_MINIMUM_REVIEW_SCORE = 1;
         private const int RESTAURANT_MAXIMUM_REVIEW_SCORE = 5;
+        private string _Hours;
 
         #endregion
 
         #region Properties
 
+        /// <summary>
+        /// The restaurant name (has only a getter).
+        /// </summary>
+        /// <value>
+        /// The restaurant name.
+        /// </value>
         public string Name { get; }
+        /// <summary>
+        /// Gets the phone number.
+        /// </summary>
+        /// <value>
+        /// The phone number.
+        /// </value>
+        public string PhoneNumber { get; }
+        /// <summary>
+        /// The restaurant price (has only a getter).
+        /// </summary>
+        /// <value>
+        /// The restaurant price.
+        /// </value>
         public string Price { get; }
+        /// <summary>
+        /// The restaurant's location (has only a getter).
+        /// </summary>
+        /// <value>
+        /// The restaurant's location.
+        /// </value>
         public string Location { get; }
-        public string Hours { get; }
+        /// <summary>
+        /// The restaurant's hours (has a getter and setter).
+        /// </summary>
+        /// <value>
+        /// The restaurant's hours.
+        /// </value>
+        public string Hours {
+            get { return _Hours;}
+            set { this._Hours = value; }
+        }
+        /// <summary>
+        /// The restaurant's distance (has only a getter).
+        /// </summary>
+        /// <value>
+        /// The restaurant's distance.
+        /// </value>
         public string Distance { get; }
+        /// <summary>
+        /// The restaurant's review score (has only a getter).
+        /// </summary>
+        /// <value>
+        /// The restaurant's review score.
+        /// </value>
         public double ReviewScore { get; }
+        /// <summary>
+        /// The restaurant's review count (has only a getter).
+        /// </summary>
+        /// <value>
+        /// The restaurant's review count.
+        /// </value>
         public int ReviewCount { get; }
+        /// <summary>
+        /// The restaurant's menu url (has only a getter).
+        /// </summary>
+        /// <value>
+        /// The restaurant's menu url.
+        /// </value>
         public string MenuUrl { get; }
+        /// <summary>
+        /// The restaurant's menu url (has only a getter).
+        /// </summary>
+        /// <value>
+        /// The restaurant's menu url.
+        /// </value>
         public string ImageUrl { get; }
+        /// <summary>
+        /// The restaurant's id (has only a getter).
+        /// </summary>
+        /// <value>
+        /// The restaurant's id.
+        /// </value>
         public string Id { get; }
 
         #endregion
@@ -38,39 +109,41 @@ namespace Random_Restaurant_Picker.Models {
         ///     The constructor for the restaurant class
         /// </summary>
         /// <precondition>
-        ///     name                DOES NOT EQUAL null
-        ///     name.isEmpty()      EQUALS False
-        ///     price               DOES NOT EQUAL null
-        ///     price.isEmpty()     EQUALS False
-        ///     location            DOES NOT EQUAL null
-        ///     location.isEmpty()  EQUALS False
-        ///     hours               DOES NOT EQUAL null
-        ///     hours.isEmpty()     EQUALS False
-        ///     distance            DOES NOT EQUAL null
-        ///     distance.isEmpty()  EQUALS False
-        ///     reviewScore         MORE THAN OR EQUAL TO 0
-        ///     reviewScore         LESS THAN OR EQUAL TO 5
-        ///     reviewCount         MORE THAN OR EQUAL TO 0
-        ///     menuURL             DOES NOT EQUAL null
-        ///     menuURL.isEmpty()   EQUALS False
-        ///     imageURL            DOES NOT EQUAL null
-        ///     imageURL.isEmpty()  EQUALS False
-        ///     id                  DOES NOT EQUAL null
-        ///     id.isEmpty()        EQUALS False
+        ///     name                    != null
+        ///     name.isEmpty()          == False
+        ///     phoneNumber             != null
+        ///     phoneNumber.isEmpty()   == False
+        ///     price                   != null
+        ///     price.isEmpty()         == False
+        ///     hours                   != null
+        ///     hours.isEmpty()         == False
+        ///     distance                != null
+        ///     distance.isEmpty()      == False
+        ///     reviewScore             MORE THAN OR EQUAL TO 0
+        ///     reviewScore             LESS THAN OR EQUAL TO 5
+        ///     reviewCount             MORE THAN OR EQUAL TO 0
+        ///     menuURL                 != null
+        ///     menuURL.isEmpty()       == False
+        ///     imageURL                != null
+        ///     imageURL.isEmpty()      == False
+        ///     id                      != null
+        ///     id.isEmpty()            == False
         /// </precondition>
         /// <postcondition>
-        ///     this.name           EQUALS name
-        ///     this.price          EQUALS price
-        ///     this.location       EQUALS location
-        ///     this.hours          EQUALS hours
-        ///     this.distance       EQUALS distance
-        ///     this.reviewScore    EQUALS reviewScore
-        ///     this.reviewCount    EQUALS reviewCount
-        ///     this.menuUrl        EQUALS menuUrl
-        ///     this.imageUrl       EQUALS imageUrl
-        ///     this.id             EQUALS id
+        ///     this.Name               == name
+        ///     this.PhoneNumber        == phoneNumber
+        ///     this.Price              == price
+        ///     this.Location           == location
+        ///     this.Hours              == null
+        ///     this.Distance           == distance
+        ///     this.ReviewScore        == reviewScore
+        ///     this.ReviewCount        == reviewCount
+        ///     this.MenuUrl            == menuUrl
+        ///     this.ImageUrl           == imageUrl
+        ///     this.Id                 == id
         /// </postcondition>
         /// <param name="name">the restaurant's name</param>
+        /// <param name="phoneNumber">the restaurant's phone number</param>
         /// <param name="price">the restaurant's price</param>
         /// <param name="location">the address of the restaurant</param>
         /// <param name="hours">the hours the restaurant is open</param>
@@ -80,11 +153,11 @@ namespace Random_Restaurant_Picker.Models {
         /// <param name="menuUrl">the URL to the restaurants menu</param>
         /// <param name="imageUrl">the URL to the restaurants image</param>
         /// <param name="id">the yelp id of the restaurant</param>
-        public Restaurant(string name, string price, string location, string hours, string distance, double reviewScore,
-            int reviewCount, string menuUrl, string imageUrl, string id) {
-            checkPreconditions(name, price, location, hours, distance, reviewScore, reviewCount, menuUrl, imageUrl, id);
+        public Restaurant(string name, string phoneNumber, string price, string location, string hours, string distance, double reviewScore, int reviewCount, string menuUrl, string imageUrl, string id) {
+            checkPreconditions(name, phoneNumber, price, location, hours, distance, reviewScore, reviewCount, menuUrl, imageUrl, id);
 
             this.Name = name;
+            this.PhoneNumber = phoneNumber;
             this.Price = price;
             this.Location = location;
             this.Hours = hours;
@@ -100,14 +173,21 @@ namespace Random_Restaurant_Picker.Models {
 
         #region Methods
 
-        /**
-         * Returns the string representation of the restaurant
-         * 
-         * @precondition none
-         * @postcondition none
-         * 
-         * @return the string representation of the restaurant object
-         */
+        /// <summary>
+        /// Returns the string representation of the restaurant
+        /// </summary>
+        ///
+        /// <precondition>
+        /// none
+        /// </precondition>
+        ///
+        /// <postcondition>
+        /// none
+        /// </postcondition>
+        /// 
+        /// <returns>
+        /// A <see cref="System.String" /> that represents the restaurant.
+        /// </returns>
         public override string ToString() {
             return "Restaurant (name: " + this.Name + " price: " + this.Price + " location: " + this.Location +
                    " hours: " + this.Hours + " distance: " + this.Distance + " review score: " + this.ReviewScore +
@@ -115,14 +195,21 @@ namespace Random_Restaurant_Picker.Models {
                    this.ImageUrl + " id: " + this.Id + ')';
         }
 
-        private static void checkPreconditions(string name, string price, string location, string hours,
-            string distance, double reviewScore, int reviewCount, string menuUrl, string imageUrl, string id) {
+        private static void checkPreconditions(string name, string phoneNumber, string price, string location, string hours, string distance, double reviewScore, int reviewCount, string menuUrl, string imageUrl, string id) {
             if (name == null) {
                 throw new ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_NAME_CANNOT_BE_NULL);
             }
 
             if (name.IsEmpty()) {
                 throw new ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_NAME_CANNOT_BE_EMPTY);
+            }
+
+            if (phoneNumber == null) {
+                throw new ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_PHONE_NUMBER_CANNOT_BE_NULL);
+            }
+
+            if (phoneNumber.IsEmpty()) {
+                throw new ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_PHONE_NUMBER_CANNOT_BE_EMPTY);
             }
 
             if (price == null) {
@@ -141,14 +228,6 @@ namespace Random_Restaurant_Picker.Models {
                 throw new ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_LOCATION_CANNOT_BE_EMPTY);
             }
 
-            if (hours == null) {
-                throw new ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_HOURS_CANNOT_BE_NULL);
-            }
-
-            if (hours.IsEmpty()) {
-                throw new ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_HOURS_CANNOT_BE_EMPTY);
-            }
-
             if (distance == null) {
                 throw new ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_DISTANCE_CANNOT_BE_NULL);
             }
@@ -158,18 +237,15 @@ namespace Random_Restaurant_Picker.Models {
             }
 
             if (reviewScore < RESTAURANT_MINIMUM_REVIEW_SCORE) {
-                throw new ArgumentException(ErrorMessages.ErrorMessages
-                                                         .RESTAURANT_REVIEW_SCORE_CANNOT_BE_LESS_THAN_ZERO);
+                throw new ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_REVIEW_SCORE_CANNOT_BE_LESS_THAN_ZERO);
             }
 
             if (reviewScore > RESTAURANT_MAXIMUM_REVIEW_SCORE) {
-                throw new ArgumentException(ErrorMessages.ErrorMessages
-                                                         .RESTAURANT_REVIEW_SCORE_CANNOT_BE_MORE_THAN_FIVE);
+                throw new ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_REVIEW_SCORE_CANNOT_BE_MORE_THAN_FIVE);
             }
 
             if (reviewCount < RESTAURANT_MINIMUM_REVIEW_COUNT) {
-                throw new ArgumentException(ErrorMessages.ErrorMessages
-                                                         .RESTAURANT_REVIEW_COUNT_CANNOT_BE_LESS_THAN_ZERO);
+                throw new ArgumentException(ErrorMessages.ErrorMessages.RESTAURANT_REVIEW_COUNT_CANNOT_BE_LESS_THAN_ZERO);
             }
 
             if (menuUrl == null) {

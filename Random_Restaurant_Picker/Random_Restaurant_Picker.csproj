@@ -102,11 +102,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API_Information\apiKey.cs" />
+    <Compile Include="API_Information\ApiKey.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Data\Data_Utils\RestaurantsQueryUtils.cs" />
     <Compile Include="ErrorMessages\ErrorMessages.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -114,7 +115,7 @@
     <Compile Include="Models\Restaurant.cs" />
     <Compile Include="Models\RestaurantFilters.cs" />
     <Compile Include="Models\RestaurantManager.cs" />
-    <Compile Include="Models\RestaurantsQuery.cs" />
+    <Compile Include="Data\RestaurantsQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
